@@ -10,6 +10,7 @@ const dmSans = DM_Sans({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "DevSomeware",
   description: "DevSomeWare is an Open Source Software Community",
+  
 };
 
 export default function RootLayout({
