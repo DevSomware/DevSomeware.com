@@ -18,7 +18,7 @@ export const Navbar = () => {
                 <div className="rounded-full border absolute inset-0 border-white/40 [mask-image:linear-gradient(to_top,black,transparent)]"></div>
                <div className="absolute inset-0 shadow-[0_0_15px_rgb(140,69,255,0.8)_inset] full animate-glow"></div>
                </div>
-               <span className="relative z-10">("Join Us")</span>
+               <span className="relative z-10">(Join Us)</span>
               </button>
                  
             </div>
