@@ -8,6 +8,7 @@ import {Footers} from '@/sections/Footers';
 import img1 from '@/assets/terminal.png';
 import img2 from '@/assets/arrow-up.png';
 import {motion,useScroll,useTransform} from "framer-motion";
+import { LogoMotion } from "@/sections/LogoMotion";
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -215,7 +216,7 @@ const Contact = () => {
           </div>
         </div>
       </motion.section>
-
+      <LogoMotion />
       <Footers />
     </>
   );
