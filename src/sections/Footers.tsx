@@ -9,14 +9,14 @@ export const Footers = () => {
                 {/* Left Side: Logo and Title */}
                 <div className="flex items-center gap-2">
                    <Image src={Logo} alt="DWS Logo" width={80} height={20} className="sm:w-20 sm:h-6 md:w-24 md:h-8 lg:w-28 lg:h-10" />
-                   <div className="font-medium text-white text-sm sm:text-base md:text-lg lg:text-xl">
+                   {/* <div className="font-medium text-white text-sm sm:text-base md:text-lg lg:text-xl">
                       DevSomeware
-                   </div>
+                   </div> */}
                 </div>
 
                 {/* Right Side: All Rights Reserved */}
                 <div className="font-medium text-white text-xs sm:text-sm md:text-base lg:text-lg text-center md:text-right">
-                   All rights reserved @DevSomeware 2024    
+                   All rights reserved devsomeware.com   
                 </div>
              </div>
           </div>

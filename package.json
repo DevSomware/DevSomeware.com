@@ -14,6 +14,7 @@
     "framer-motion": "^12.0.0-alpha.0",
     "kursor": "^0.1.6",
     "next": "15.0.2",
+    "nextjs-toploader": "^3.7.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

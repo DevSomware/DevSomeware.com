@@ -2,9 +2,7 @@
 import starsBg from "@/assets/stars.png";
 import { useRef, useState, ChangeEvent, FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
-import {Navbar} from '@/sections/Navbar';
 import Image from 'next/image';
-import {Footers} from '@/sections/Footers';
 import img1 from '@/assets/terminal.png';
 import img2 from '@/assets/arrow-up.png';
 import {motion,useScroll,useTransform} from "framer-motion";
@@ -58,7 +56,7 @@ const Contact = () => {
           from_name: form.name,
           to_name: 'Aniket Subudhi',
           from_email: form.email,
-          to_email: 'aniketsubudhi00@gmail.com',
+          to_email: 'aniketsubudhi00@gmail.com,khanbasir5555@gmail.com',
           message: form.message,
         },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
@@ -123,7 +121,6 @@ const Contact = () => {
    const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
   return (
     <>
-      <Navbar />
 
       {alert.show && <Alert type={alert.type} text={alert.text} />}
 
@@ -148,14 +145,13 @@ const Contact = () => {
             height={800}
             width={1000}
             
-            className="absolute mb-8 lg:h-[800px] lg:w-[1100px] lg:left-60 inset-0 left-auto object-cover lg:right-72 lg:top-0 sm:right-0 sm:top-8 sm:h-[800px]"
+            className="absolute mb-8 lg:h-[810px] lg:w-[1100px] lg:left-60 inset-0 left-auto object-cover lg:right-72 lg:top-0 right-0 top-8 h-[800px]"
           />
 
           <div className="relative z-10 max-w-2xl w-full px-4">
             <h3 className="text-4xl font-extrabold text-white">Lets talk</h3>
             <p className="mt-3 text-lg text-gray-300">
-              Whether you’re looking to build a new website, improve your existing platform, or bring a unique project to
-              life, I’m here to help.
+            Whether you are interested in contributing to open-source projects, joining our developer community, participating in events, or just saying hello, we’d love to hear from you!
             </p>
 
             <form ref={formRef} onSubmit={handleSubmit} className="mt-12 space-y-6">
@@ -217,7 +213,6 @@ const Contact = () => {
         </div>
       </motion.section>
       <LogoMotion />
-      <Footers />
     </>
   );
 };
