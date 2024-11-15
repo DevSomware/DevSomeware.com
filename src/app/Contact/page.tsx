@@ -44,50 +44,26 @@ const Contact = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async(e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          from_name: form.name,
-          to_name: 'Aniket Subudhi',
-          from_email: form.email,
-          to_email: 'aniketsubudhi00@gmail.com,khanbasir5555@gmail.com',
-          message: form.message,
-        },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
-      )
-      .then(
-        () => {
-          setLoading(false);
-          showAlert({
-            text: 'Thank you for your message 😃',
-            type: 'success',
-          });
-
-          setTimeout(() => {
-            hideAlert();
-            setForm({
-              name: '',
-              email: '',
-              message: '',
-            });
-          }, 3000);
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
-
-          showAlert({
-            text: "I didn't receive your message 😢",
-            type: 'danger',
-          });
-        },
-      );
+   const data = await fetch("/api/contact", {
+    method: "POST",
+    body: JSON.stringify(form),
+   });
+    const response = await data.json();
+    setLoading(false);
+    if (response.success) {
+      showAlert({ text: 'Message sent successfully!', type: 'success' });
+      setTimeout(() => {
+        hideAlert();
+        setForm({ name: '', email: '', message: '' });
+      },3000)
+      
+    } else {
+      showAlert({ text: response.message,type: 'danger' });
+    }
+   
   };
 
   // Alert component
