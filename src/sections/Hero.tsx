@@ -87,8 +87,8 @@ export const Hero = () => {
       </motion.div>
       
       <div className="container relative mt-28">
-        <h1 className="text-7xl md:text-[168px] lg:text-[180px] md:leading-none bg-white lg:text-8xl font-semibold text-center tracking-tighter bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text">
-          Coming <br></br>Soon
+        <h1 className="text-5xl md:text-[140px] lg:text-[150px] md:leading-none bg-white lg:text-8xl font-semibold text-center tracking-tighter bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text">
+          DevSomeware
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl text-white/70 mt-5 text-center max-w-xl mx-auto">
           DevSomeware is an open-source community that believes in working and growing together

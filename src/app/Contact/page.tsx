@@ -1,7 +1,6 @@
 "use client";
 import starsBg from "@/assets/stars.png";
 import { useRef, useState, ChangeEvent, FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
 import Image from 'next/image';
 import img1 from '@/assets/terminal.png';
 import img2 from '@/assets/arrow-up.png';
