@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
-import { Footers } from "@/sections/Footers";
-const dmSans = DM_Sans({ subsets: ["latin"] });
 import NextTopLoader from "nextjs-toploader";
-import { Navbar } from "@/components/Navbar";
-import BottomNavbar from "@/components/B-Navbar";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ClientWrapper } from "@/wrapper/ClientWrapper";
+import Cursor from "@/components/ui/cursor";
+const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "DevSomeWare - Open Source Developer Community",
@@ -77,14 +75,10 @@ export default function RootLayout({
           zIndex={1600}
           showAtBottom={false}
         />
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <Navbar />
-          {children}
-          <div className="block md:hidden">
-            <BottomNavbar />
-          </div>
-          <Footers />
-        </ThemeProvider>
+        <div className="hidden md:block">
+          <Cursor />
+        </div>
+        <ClientWrapper>{children}</ClientWrapper>
       </body>
     </html>
   );

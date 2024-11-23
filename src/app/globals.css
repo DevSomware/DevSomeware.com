@@ -1,3 +1,98 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  cursor: none; 
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(238, 228, 238, 0.3);
+   
+  transition: transform 0.15s ease-out, background-color 0.15s ease-out; 
+}
+
+
+
+.cursor-text {
+  font-size: 6px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  display: none;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Logo styles with responsive font size */
+.logo {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  font-size: 1.5rem; /* Default font size for small devices */
+}
+
+@media (min-width: 768px) {
+  .logo {
+    font-size: 3rem; /* Larger font size for medium devices */
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo {
+    font-size: 4rem; /* Larger font size for large devices */
+  }
+}
+
+/* Shine text with responsiveness */
+.shine-text {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(90deg, #fff, #ddd, #fff);
+  background-clip: text;
+  color: transparent;
+  animation: text-shine 2s linear infinite;
+}
+
+.shine-animation {
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+  transform: skewX(-45deg);
+  animation: shine-effect 2s linear infinite;
+}
+
+/* Keyframes */
+@keyframes text-shine {
+  0% {
+    background-position: -200%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+@keyframes shine-effect {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
