@@ -1,20 +1,27 @@
 "use client";
 import starsBg from "@/assets/stars.png";
-import { useRef, useState, ChangeEvent, FormEvent } from 'react';
-import Image from 'next/image';
-import img1 from '@/assets/terminal.png';
-import img2 from '@/assets/arrow-up.png';
-import {motion,useScroll,useTransform} from "framer-motion";
+import { useRef, useState, ChangeEvent, FormEvent } from "react";
+import Image from "next/image";
+import img1 from "@/assets/terminal.png";
+import img2 from "@/assets/arrow-up.png";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { LogoMotion } from "@/sections/LogoMotion";
+
 const Contact = () => {
+  const pathname = usePathname();
   const formRef = useRef<HTMLFormElement>(null);
 
-  type AlertType = 'danger' | 'success';
+  type AlertType = "danger" | "success";
 
-  const [alert, setAlert] = useState<{ show: boolean; text: string; type: AlertType }>({
+  const [alert, setAlert] = useState<{
+    show: boolean;
+    text: string;
+    type: AlertType;
+  }>({
     show: false,
-    text: '',
-    type: 'danger',
+    text: "",
+    type: "danger",
   });
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -25,44 +32,49 @@ const Contact = () => {
   }
 
   const [form, setForm] = useState<FormState>({
-    name: '',
-    email: '',
-    message: '',
+    name: "",
+    email: "",
+    message: "",
   });
 
   // Alert functions
-  const showAlert = ({ text, type = 'danger' }: { text: string; type?: AlertType }) =>
-    setAlert({ show: true, text, type });
-  const hideAlert = () => setAlert({ show: false, text: '', type: 'danger' });
+  const showAlert = ({
+    text,
+    type = "danger",
+  }: {
+    text: string;
+    type?: AlertType;
+  }) => setAlert({ show: true, text, type });
+  const hideAlert = () => setAlert({ show: false, text: "", type: "danger" });
 
   // Handle input changes
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const name = e.target.name as keyof FormState;
     const value = e.target.value;
     setForm((prevForm) => ({ ...prevForm, [name]: value }));
   };
 
   // Handle form submission
-  const handleSubmit = async(e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-   const data = await fetch("/api/contact", {
-    method: "POST",
-    body: JSON.stringify(form),
-   });
+    const data = await fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
     const response = await data.json();
     setLoading(false);
     if (response.success) {
-      showAlert({ text: 'Message sent successfully!', type: 'success' });
+      showAlert({ text: "Message sent successfully!", type: "success" });
       setTimeout(() => {
         hideAlert();
-        setForm({ name: '', email: '', message: '' });
-      },3000)
-      
+        setForm({ name: "", email: "", message: "" });
+      }, 3000);
     } else {
-      showAlert({ text: response.message,type: 'danger' });
+      showAlert({ text: response.message, type: "danger" });
     }
-   
   };
 
   // Alert component
@@ -71,65 +83,81 @@ const Contact = () => {
       <div className="fixed bottom-5 right-5 flex justify-center items-center z-50">
         <div
           className={`p-5 ${
-            type === 'danger' ? 'bg-red-800' : 'bg-blue-800'
+            type === "danger" ? "bg-red-800" : "bg-blue-800"
           } items-center text-indigo-100 leading-none rounded-md flex`}
           role="alert"
         >
           <span
             className={`flex rounded-full ${
-              type === 'danger' ? 'bg-red-500' : 'bg-blue-500'
+              type === "danger" ? "bg-red-500" : "bg-blue-500"
             } uppercase px-2 py-1 text-xs font-semibold mr-3`}
           >
-            {type === 'danger' ? 'Failed' : 'Success'}
+            {type === "danger" ? "Failed" : "Success"}
           </span>
           <span className="mr-2 text-left">{text}</span>
         </div>
       </div>
     );
   };
+
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
-     target: sectionRef,
-     offset: ['start end','end start']
-   });
-   
-   const backgroundPositionY = useTransform(scrollYProgress, [0, 1], [-300, 300]);
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundPositionY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-300, 300]
+  );
+
+  const isActive = pathname === "/contact";
   return (
     <>
-
       {alert.show && <Alert type={alert.type} text={alert.text} />}
 
-      <motion.section 
-      style={{
-        backgroundImage: `url(${starsBg.src})`,
-        backgroundPositionY,
-      }}
-      animate={{
-        backgroundPositionX: starsBg.width,
-      }}
-      transition={{
-        duration: 60,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-      className="my-20 " id="contact">
+      <motion.section
+        ref={sectionRef}
+        style={{
+          backgroundImage: `url(${starsBg.src})`,
+          backgroundPositionY,
+        }}
+        animate={{
+          backgroundPositionX: starsBg.width,
+        }}
+        transition={{
+          duration: 60,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className={`my-20 ${
+          isActive ? "border-4 border-purple-500 shadow-lg" : ""
+        }`}
+        id="contact"
+      >
         <div className="relative min-h-screen flex items-center justify-center">
           <Image
             src={img1}
             alt="terminal-bg"
             height={800}
             width={1000}
-            
             className="absolute mb-8 lg:h-[810px] lg:w-[1100px] lg:left-60 inset-0 left-auto object-cover lg:right-72 lg:top-0 right-0 top-8 h-[800px]"
           />
 
           <div className="relative z-10 max-w-2xl w-full px-4">
             <h3 className="text-4xl font-extrabold text-white">Lets talk</h3>
             <p className="mt-3 text-lg text-gray-300">
-            Whether you are interested in contributing to open-source projects, joining our developer community, participating in events, or just saying hello, we’d love to hear from you!
+              Whether you are interested in contributing to open-source
+              projects, joining our developer community, participating in
+              events, or just saying hello, we’d love to hear from you!
             </p>
 
-            <form ref={formRef} onSubmit={handleSubmit} className="mt-12 space-y-6">
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="mt-12 space-y-6"
+            >
               <label className="block">
                 <span className="text-white">Full Name</span>
                 <input
@@ -174,7 +202,7 @@ const Contact = () => {
                 disabled={loading}
                 className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
               >
-                {loading ? 'Sending...' : 'Send Message'}
+                {loading ? "Sending..." : "Send Message"}
                 <Image
                   src={img2}
                   alt="arrow-up"
