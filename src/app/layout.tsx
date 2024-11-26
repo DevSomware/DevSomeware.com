@@ -8,11 +8,11 @@ import Cursor from "@/components/ui/cursor";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DevSomeWare - Open Source Developer Community",
+  title: "DevSomeware - Open Source Developer Community",
   description:
-    "Join DevSomeWare, an open-source community for developers to learn, grow, and collaborate. Participate in hackathons, events, and build exciting projects while contributing to open source.",
+    "Join DevSomeware, an open-source community for developers to learn, grow, and collaborate. Participate in hackathons, events, and build exciting projects while contributing to open source.",
   keywords: [
-    "DevSomeWare",
+    "DevSomeware",
     "Open Source Community",
     "Developer Community",
     "Hackathons",
@@ -27,9 +27,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "DevSomeWare - Open Source Developer Community",
+    title: "DevSomeware - Open Source Developer Community",
     description:
-      "DevSomeWare is a thriving community for developers to learn, participate in hackathons, and contribute to open source projects.",
+      "DevSomeware is a thriving community for developers to learn, participate in hackathons, and contribute to open source projects.",
     url: "https://devsomeware.com",
     type: "website",
     images: [
@@ -37,14 +37,14 @@ export const metadata: Metadata = {
         url: "/alogo.png",
         width: 1200,
         height: 630,
-        alt: "DevSomeWare Open Source Developer Community",
+        alt: "DevSomeware Open Source Developer Community",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@DevSomeWare",
-    title: "DevSomeWare - Open Source Developer Community",
+    site: "@DevSomeware",
+    title: "DevSomeware - Open Source Developer Community",
     description:
       "A community where developers can learn, grow, and contribute to open source. Join us for hackathons, workshops, and collaborative projects.",
     images: "/alogo.png",

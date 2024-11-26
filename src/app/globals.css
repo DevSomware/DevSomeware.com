@@ -4,7 +4,7 @@
 
 html,
 body {
-  cursor: none; 
+  cursor: none;
 }
 
 .custom-cursor {
@@ -22,11 +22,9 @@ body {
   justify-content: center;
   align-items: center;
   background-color: rgba(238, 228, 238, 0.3);
-   
-  transition: transform 0.15s ease-out, background-color 0.15s ease-out; 
+
+  transition: transform 0.15s ease-out, background-color 0.15s ease-out;
 }
-
-
 
 .cursor-text {
   font-size: 6px;
@@ -37,62 +35,81 @@ body {
   text-transform: uppercase;
 }
 
-/* Logo styles with responsive font size */
 .logo {
   position: relative;
   display: inline-block;
   overflow: hidden;
-  font-size: 1.5rem; /* Default font size for small devices */
+  font-size: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .logo {
-    font-size: 3rem; /* Larger font size for medium devices */
+    font-size: 3rem;
   }
 }
 
 @media (min-width: 1024px) {
   .logo {
-    font-size: 4rem; /* Larger font size for large devices */
+    font-size: 5rem;
   }
 }
 
-/* Shine text with responsiveness */
 .shine-text {
   position: relative;
   z-index: 10;
-  background: linear-gradient(90deg, #fff, #ddd, #fff);
+  background: linear-gradient(90deg, #e0e4ff, #ffffff, #a29bfe);
   background-clip: text;
   color: transparent;
-  animation: text-shine 2s linear infinite;
+  animation: text-glow 1.5s ease-in-out infinite;
 }
 
-.shine-animation {
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-  transform: skewX(-45deg);
-  animation: shine-effect 2s linear infinite;
+.line-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
 }
 
-/* Keyframes */
-@keyframes text-shine {
+.line-loader span {
+  width: 10px;
+  height: 40px;
+  background: linear-gradient(180deg, #ffffff, #a29bfe);
+  animation: bounce 1.5s infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.line-loader span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.line-loader span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.line-loader span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+
+
+@keyframes text-glow {
   0% {
-    background-position: -200%;
+    background-position: -100%;
+  }
+  50% {
+    text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8),
+                 0px 0px 20px rgba(136, 16, 222, 0.6);
   }
   100% {
     background-position: 200%;
   }
 }
 
-@keyframes shine-effect {
-  0% {
-    left: -150%;
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
   }
-  100% {
-    left: 150%;
+  50% {
+    transform: translateY(-20px);
   }
 }

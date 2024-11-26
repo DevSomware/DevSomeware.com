@@ -94,7 +94,6 @@ export const Hero = () => {
         <div className="absolute h-2 w-2  left-full bg-white rounded-full  top-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
       </motion.div>
 
-      {/* Content with Sequential Animation and Fade-Out on Scroll */}
       <motion.div
         className="container relative mt-28 text-center"
         style={{
@@ -102,7 +101,6 @@ export const Hero = () => {
           y: textY,
         }}
       >
-        {/* Heading Animation */}
         <motion.h1
           className="text-5xl md:text-[110px] lg:text-[150px] md:leading-none bg-white lg:text-8xl font-semibold tracking-tighter bg-[radial-gradient(100%_100%_at_top_left,white,white,rgb(74,32,138,.5))] text-transparent bg-clip-text"
           initial={{ opacity: 0, y: 20 }}

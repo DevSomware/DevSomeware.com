@@ -16,7 +16,7 @@
     "@types/nodemailer": "^6.4.16",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "framer-motion": "^12.0.0-alpha.0",
+    "framer-motion": "^11.0.0",
     "gsap": "^3.12.5",
     "kursor": "^0.1.6",
     "lucide-react": "^0.460.0",
@@ -25,7 +25,9 @@
     "nextjs-toploader": "^3.7.15",
     "nodemailer": "^6.9.16",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "simplex-noise": "^4.0.3",
+    "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
     "@types/node": "^20",
