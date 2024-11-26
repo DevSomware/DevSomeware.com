@@ -10,7 +10,7 @@ export const WavyBackground = ({
   colors,
   waveWidth,
   backgroundFill,
-  blur = 10,
+  blur = 3,
   speed = "fast",
   waveOpacity = 0.5,
   ...props
@@ -49,11 +49,11 @@ export const WavyBackground = ({
     ctx.filter = `blur(${blur}px)`;
 
     const waveColors = colors || [
-      "#4c1d95",
-      "#6b21a8",
-      "#7e22ce",
-      "#a855f7",
-      "#9333ea",
+      "#6a0dad",
+      "#8b5cf6",
+      "#9f7aea",
+      "#b794f4",
+      "#d8b4fe",
     ];
 
     const drawWave = (n: number) => {

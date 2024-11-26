@@ -11,7 +11,7 @@ export function WavyBackgroundDemo() {
     <WavyBackground className="max-w-4xl mx-auto pb-12">
       <div ref={ref}>
         <motion.p
-          className="text-2xl md:text-4xl lg:text-6xl text-white font-bold inter-var text-center"
+          className="text-2xl md:text-4xl lg:text-6xl text-purple-100 font-bold inter-var text-center shadow-glow"
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
