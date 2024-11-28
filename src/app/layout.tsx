@@ -5,9 +5,11 @@ import clsx from "clsx";
 import NextTopLoader from "nextjs-toploader";
 import { ClientWrapper } from "@/wrapper/ClientWrapper";
 import Cursor from "@/components/ui/cursor";
+
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://devsomeware.com"),
   title: "DevSomeware - Open Source Developer Community",
   description:
     "Join DevSomeware, an open-source community for developers to learn, grow, and collaborate. Participate in hackathons, events, and build exciting projects while contributing to open source.",

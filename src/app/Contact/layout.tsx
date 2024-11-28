@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/alogo.png", // Path to a relevant Open Graph image
+        url: "/alogo.png",
         width: 1200,
         height: 630,
         alt: "Contact DevSomeware - Open Source Community",
