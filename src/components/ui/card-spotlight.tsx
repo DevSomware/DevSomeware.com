@@ -15,7 +15,7 @@ const CanvasRevealEffect = dynamic(
 export const CardSpotlight = ({
   children,
   radius = 350,
-  color = "#3B82F6",
+  color = "#9C27B0",
   className,
   ...props
 }: {
