@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import { CardSpotlight } from "@/components/ui/card-spotlight";
 import { Users, Code, Rocket, GitFork } from "lucide-react";
@@ -90,7 +89,7 @@ export function CardsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: false, amount: 0.2 }}
-          className="lg:text-5xl sm:text-2xl -mt-28 font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-neutral-200 to-purple-500 py-8"
+          className="lg:text-5xl sm:text-3xl -mt-28 font-bold text-center text-transparent bg-clip-text bg-gradient-to-b from-neutral-200 to-purple-500 py-8"
         >
           What We Offer?
         </motion.p>

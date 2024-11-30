@@ -60,7 +60,7 @@ body {
   background: linear-gradient(90deg, #e0e4ff, #ffffff, #a29bfe);
   background-clip: text;
   color: transparent;
-  animation: text-glow 1s ease-in-out infinite; 
+  animation: text-glow 1s ease-in-out infinite;
 }
 
 .line-loader {
@@ -74,7 +74,7 @@ body {
   width: 10px;
   height: 40px;
   background: linear-gradient(180deg, #ffffff, #a29bfe);
-  animation: bounce 1s infinite; 
+  animation: bounce 1s infinite;
   animation-timing-function: ease-in-out;
 }
 
@@ -83,11 +83,11 @@ body {
 }
 
 .line-loader span:nth-child(2) {
-  animation-delay: 0.2s; 
+  animation-delay: 0.2s;
 }
 
 .line-loader span:nth-child(3) {
-  animation-delay: 0.4s; 
+  animation-delay: 0.4s;
 }
 
 @keyframes text-glow {
@@ -96,7 +96,7 @@ body {
   }
   50% {
     text-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8),
-                 0px 0px 20px rgba(136, 16, 222, 0.6);
+      0px 0px 20px rgba(136, 16, 222, 0.6);
   }
   100% {
     background-position: 200%;
@@ -104,11 +104,11 @@ body {
 }
 
 @keyframes bounce {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px); 
+    transform: translateY(-15px);
   }
 }
-

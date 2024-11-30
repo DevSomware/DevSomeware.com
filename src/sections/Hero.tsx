@@ -1,9 +1,10 @@
 "use client";
-import { Button } from "@/components/Button";
-import starsBg from "@/assets/stars.png";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import starsBg from "@/assets/stars.png";
 import Link from "next/link";
+import { Button } from "@/components/Button";
 
 export const Hero = () => {
   const sectionRef = useRef(null);
@@ -11,6 +12,12 @@ export const Hero = () => {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
+
+  const backgroundPositionY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [-300, 300]
+  );
 
   const textOpacity = useTransform(scrollYProgress, [0, 0.7], [5, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.8], [0, -50]);
@@ -21,10 +28,10 @@ export const Hero = () => {
       className="flex h-[600px] md:h-[800px] items-center overflow-hidden relative [mask-image:linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"
       style={{
         backgroundImage: `url(${starsBg.src})`,
-        backgroundPositionY: useTransform(scrollYProgress, [0, 1], [-300, 300]),
+        backgroundPosition: `center ${backgroundPositionY.get()}px`,
       }}
       animate={{
-        backgroundPositionX: starsBg.width,
+        backgroundPositionX: ["0px", `${starsBg.width}px`], // Smooth infinite X movement
       }}
       transition={{
         duration: 60,
@@ -52,14 +59,15 @@ export const Hero = () => {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-[344px] w-[344px] md:h-[580px] md:w-[580px] border-white border opacity-20  rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        className="absolute h-[344px] w-[344px] md:h-[580px] md:w-[580px] border-white border opacity-20 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       >
-        <div className="absolute h-2 w-2  left-0 bg-white rounded-full  top-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
-        <div className="absolute h-2 w-2  left-1/2 bg-white rounded-full  top-0 -translate-x-1/2 -translate-y-1/2 "></div>
-        <div className="absolute h-5 w-5  left-full border border-white rounded-full  top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center  ">
+        <div className="absolute h-2 w-2 left-0 bg-white rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute h-2 w-2 left-1/2 bg-white rounded-full top-0 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute h-5 w-5 left-full border border-white rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center">
           <div className="h-2 w-2 bg-white rounded-full"></div>
         </div>
       </motion.div>
+
       <motion.div
         style={{
           translateY: "-50%",
@@ -73,8 +81,9 @@ export const Hero = () => {
           duration: 60,
           ease: "linear",
         }}
-        className="absolute h-[444px] w-[444px] md:h-[780px] md:w-[780px] rounded-full border border-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed "
+        className="absolute h-[444px] w-[444px] md:h-[780px] md:w-[780px] rounded-full border border-white/20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"
       ></motion.div>
+
       <motion.div
         style={{
           translateY: "-50%",
@@ -88,10 +97,10 @@ export const Hero = () => {
           repeat: Infinity,
           ease: "linear",
         }}
-        className="absolute h-[544px] w-[544px] md:h-[980px] md:w-[980px] rounded-full border border-white opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed "
+        className="absolute h-[544px] w-[544px] md:h-[980px] md:w-[980px] rounded-full border border-white opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-dashed"
       >
-        <div className="absolute h-2 w-2  left-0 bg-white rounded-full  top-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
-        <div className="absolute h-2 w-2  left-full bg-white rounded-full  top-1/2 -translate-x-1/2 -translate-y-1/2 "></div>
+        <div className="absolute h-2 w-2 left-0 bg-white rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute h-2 w-2 left-full bg-white rounded-full top-1/2 -translate-x-1/2 -translate-y-1/2"></div>
       </motion.div>
 
       <motion.div
@@ -110,7 +119,6 @@ export const Hero = () => {
           DevSomeware
         </motion.h1>
 
-        {/* Paragraph Animation */}
         <motion.p
           className="text-lg md:text-xl lg:text-2xl text-white/70 mt-5 text-center max-w-xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -118,10 +126,9 @@ export const Hero = () => {
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
         >
           DevSomeware is an open-source community that believes in working and
-          growing together
+          growing together.
         </motion.p>
 
-        {/* Buttons Animation */}
         <motion.div
           className="flex justify-center items-center gap-5 mt-5 lg:mt-10"
           initial={{ opacity: 0, y: 20 }}
@@ -131,7 +138,7 @@ export const Hero = () => {
           <Link href="/About">
             <Button>ABOUT</Button>
           </Link>
-          <Link href="/Contact">
+          <Link href="/contact">
             <Button>CONTACT US</Button>
           </Link>
         </motion.div>

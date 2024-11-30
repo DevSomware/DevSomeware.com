@@ -1,4 +1,5 @@
 "use client";
+
 import starsBg from "@/assets/stars.png";
 import { useRef, useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
@@ -121,98 +122,97 @@ const Contact = () => {
         ref={sectionRef}
         style={{
           backgroundImage: `url(${starsBg.src})`,
-          backgroundPositionY,
+          backgroundPositionY: backgroundPositionY.get(), // Correcting motion value
         }}
         animate={{
-          backgroundPositionX: starsBg.width,
+          backgroundPositionX: ["0px", `${starsBg.width}px`], // Infinite X animation
         }}
         transition={{
           duration: 60,
           repeat: Infinity,
           ease: "linear",
         }}
-        className={`my-20 ${
-          isActive ? "border-4 border-purple-500 shadow-lg" : ""
+        className={`my-20 min-h-screen relative flex items-center justify-center bg-black text-white ${
+          isActive ? " shadow-lg" : ""
         }`}
         id="contact"
       >
-        <div className="relative min-h-screen flex items-center justify-center">
-          <Image
-            src={img1}
-            alt="terminal-bg"
-            height={800}
-            width={1000}
-            className="absolute mb-8 lg:h-[810px] lg:w-[1100px] lg:left-60 inset-0 left-auto object-cover lg:right-72 lg:top-0 right-0 top-8 h-[800px]"
-          />
+        <Image
+          src={img1}
+          alt="terminal-bg"
+          height={800}
+          width={1000}
+          className="absolute inset-0 lg:object-cover sm:object-fill lg:w-[70rem] sm:w-[30rem] sm:h-[45rem] lg:h-auto mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        />
 
-          <div className="relative z-10 max-w-2xl w-full px-4">
-            <h3 className="text-4xl font-extrabold text-white">Lets talk</h3>
-            <p className="mt-3 text-lg text-gray-300">
-              Whether you are interested in contributing to open-source
-              projects, joining our developer community, participating in
-              events, or just saying hello, we’d love to hear from you!
-            </p>
+        {/* Contact Form */}
+        <div className="relative z-10 max-w-2xl w-full px-4 text-center">
+          <h3 className="text-4xl font-extrabold">Let&apos;s Talk</h3>
+          <p className="mt-3 text-lg text-gray-300">
+            Whether you are interested in contributing to open-source projects,
+            joining our community, or just saying hello, we’d love to hear from
+            you!
+          </p>
 
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="mt-12 space-y-6"
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="mt-12 space-y-6"
+          >
+            <label className="block text-left">
+              <span className="text-white">Full Name</span>
+              <input
+                type="text"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="e.g., DevSomeware"
+              />
+            </label>
+
+            <label className="block text-left">
+              <span className="text-white">Email Address</span>
+              <input
+                type="email"
+                name="email"
+                value={form.email}
+                onChange={handleChange}
+                required
+                className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="e.g., devsomeware@gmail.com"
+              />
+            </label>
+
+            <label className="block text-left">
+              <span className="text-white">Your Message</span>
+              <textarea
+                name="message"
+                value={form.message}
+                onChange={handleChange}
+                required
+                rows={5}
+                className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Share your thoughts or inquiries..."
+              />
+            </label>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
             >
-              <label className="block">
-                <span className="text-white">Full Name</span>
-                <input
-                  type="text"
-                  name="name"
-                  value={form.name}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="e.g., DevSomeware"
-                />
-              </label>
-
-              <label className="block">
-                <span className="text-white">Email Address</span>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="e.g., devsomeware@gmail.com"
-                />
-              </label>
-
-              <label className="block">
-                <span className="text-white">Your Message</span>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="mt-1 block w-full bg-gray-800 text-white border border-gray-700 rounded-md py-2 px-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                  placeholder="Share your thoughts or inquiries..."
-                />
-              </label>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
-              >
-                {loading ? "Sending..." : "Send Message"}
-                <Image
-                  src={img2}
-                  alt="arrow-up"
-                  width={20}
-                  height={20}
-                  className="ml-2"
-                />
-              </button>
-            </form>
-          </div>
+              {loading ? "Sending..." : "Send Message"}
+              <Image
+                src={img2}
+                alt="arrow-up"
+                width={20}
+                height={20}
+                className="ml-2"
+              />
+            </button>
+          </form>
         </div>
       </motion.section>
       <LogoMotion />

@@ -203,7 +203,6 @@ const ShaderMaterial = ({
     timeLocation.value = timestamp;
   });
 
-  // Shader material
   const material = useMemo(() => {
     const getUniforms = () => {
       const preparedUniforms: {

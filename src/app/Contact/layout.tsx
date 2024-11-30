@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     title: "Contact Us - DevSomeware",
     description:
       "Get in touch with DevSomeware for support, events, partnerships, and community inquiries.",
-    images: "/alogo.png", // Path to your Open Graph image for the Contact page
+    images: "/alogo.png",
   },
   robots: "index, follow",
 };
