@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import svgToDataUri from "mini-svg-data-uri";
 import flattenColorPalette from "tailwindcss/lib/util/flattenColorPalette";
+import aspectRatio from "@tailwindcss/aspect-ratio";
 
 
 type ThemeFunction = (path: string) => unknown;
@@ -11,7 +12,7 @@ import type { PluginAPI } from "tailwindcss/types/config";
 const config: Config = {
   content: [
     "./src/sections/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{ts,tsx}",
@@ -55,7 +56,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [
+  plugins: [ 
     addVariablesForColors,
     function (api: PluginAPI) {
       const { matchUtilities, theme } = api;
@@ -83,6 +84,7 @@ const config: Config = {
         }
       );
     },
+    aspectRatio,
   ],
 };
 

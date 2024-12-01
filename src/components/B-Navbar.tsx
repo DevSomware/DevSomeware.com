@@ -11,11 +11,24 @@ import { navItems } from "@/data/nav.config";
 import cn from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function BottomNavbar() {
   const pathname = usePathname();
   const [pressedIcon, setPressedIcon] = useState<string | null>(null);
+
+  function isActivePath(pathname: string, link: string): boolean {
+    const normalize = (path: string) =>
+      path.replace(/\/$/, "").toLowerCase() || "/";
+    const currentPath = normalize(pathname);
+    const itemLink = normalize(link);
+
+    if (itemLink === "/") {
+      return currentPath === "/";
+    } else {
+      return currentPath === itemLink || currentPath.startsWith(itemLink + "/");
+    }
+  }
 
   useEffect(() => {
     setPressedIcon(null);
@@ -57,16 +70,16 @@ export default function BottomNavbar() {
                             console.log(`Icon ${item.name} clicked`);
                             setPressedIcon(item.name);
                           }}
-                          className={cn(
-                            "text-xl",
-                            pathname === item.link ||
-                              pressedIcon?.toLowerCase().trim() ===
-                                item.name.toLowerCase().trim()
-                              ? "text-purple-500"
-                              : "text-gray-600 dark:text-gray-400 hover:text-purple-500"
-                          )}
                         >
-                          {item.icon}
+                          {React.cloneElement(item.icon, {
+                            className: cn(
+                              "h-5 w-5",
+                              isActivePath(pathname, item.link) ||
+                                pressedIcon === item.name
+                                ? "text-purple-500"
+                                : "text-gray-600 dark:text-gray-400 hover:text-purple-500"
+                            ),
+                          })}
                         </span>
                       </Link>
                     </TooltipTrigger>
@@ -83,7 +96,7 @@ export default function BottomNavbar() {
         {pressedIcon && (
           <div className="absolute bottom-16 mx-auto text-center w-full">
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              <span className="font-bold text-white">{pressedIcon}</span>
+              <span className="font-bold text-purple-500">{pressedIcon}</span>
             </p>
           </div>
         )}

@@ -17,7 +17,6 @@ const Joiningform = () => {
     linkedin: "",
     languages: "",
     frameworks: "",
-    projects: "",
     interests: [] as string[],
     whyJoin: "",
     expectations: "",
@@ -44,6 +43,13 @@ const Joiningform = () => {
     >
   ) => {
     const { name, value, type } = e.target;
+
+    setErrors((prevErrors) => {
+      const updatedErrors = { ...prevErrors };
+      delete updatedErrors[name];
+      return updatedErrors;
+    });
+
     if (type === "checkbox" && e.target instanceof HTMLInputElement) {
       const { checked } = e.target;
       setFormData((prev) => ({
@@ -225,7 +231,7 @@ const Joiningform = () => {
             </LabelInputContainer>
             <LabelInputContainer>
               <Label>Domains of Interest</Label>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-4">
                 {[
                   "AR/VR",
                   "AI/ML",
@@ -233,7 +239,7 @@ const Joiningform = () => {
                   "Fullstack",
                   "Cloud/DevOps",
                 ].map((interest) => (
-                  <label key={interest} className="flex items-center space-x-2">
+                  <label key={interest} className="flex items-center space-x-0">
                     <input
                       type="checkbox"
                       name="interests"
@@ -291,37 +297,72 @@ const Joiningform = () => {
       case 3:
         return (
           <div>
-            <h3 className="text-lg font-bold mb-4">Summary</h3>
-            <p>
-              <strong>Name:</strong> {formData.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {formData.email}
-            </p>
-            <p>
-              <strong>GitHub:</strong> {formData.github}
-            </p>
-            <p>
-              <strong>LinkedIn:</strong> {formData.linkedin}
-            </p>
-            <p>
-              <strong>Languages:</strong> {formData.languages}
-            </p>
-            <p>
-              <strong>Frameworks:</strong> {formData.frameworks}
-            </p>
-            <p>
-              <strong>Projects:</strong> {formData.projects}
-            </p>
-            <p>
-              <strong>Interests:</strong> {formData.interests.join(", ")}
-            </p>
-            <p>
-              <strong>Why Join:</strong> {formData.whyJoin}
-            </p>
-            <p>
-              <strong>Expectations:</strong> {formData.expectations}
-            </p>
+            <h3 className="text-2xl font-bold text-center mb-6">Summary</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Personal Information Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-purple-600">
+                  Personal Information
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Name:</strong> {formData.name}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>Email:</strong> {formData.email}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>GitHub: </strong>
+                  <a
+                    href={formData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500"
+                  >
+                    {formData.github}
+                  </a>
+                </p>
+                <p className="break-words">
+                  <strong>LinkedIn: </strong>
+                  <a
+                    href={formData.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500"
+                  >
+                    {formData.linkedin}
+                  </a>
+                </p>
+              </div>
+
+              {/* Technical Background Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-blue-600">
+                  Technical Background
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Languages:</strong> {formData.languages}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>Frameworks:</strong> {formData.frameworks}
+                </p>
+                <p className="break-words">
+                  <strong>Interests:</strong> {formData.interests.join(", ")}
+                </p>
+              </div>
+
+              {/* Motivations Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-green-600">
+                  Motivations
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Why Join:</strong> {formData.whyJoin}
+                </p>
+                <p className="break-words">
+                  <strong>Expectations:</strong> {formData.expectations}
+                </p>
+              </div>
+            </div>
           </div>
         );
       default:

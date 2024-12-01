@@ -44,6 +44,13 @@ const Leadform = () => {
     >
   ) => {
     const { name, value, type } = e.target;
+
+    setErrors((prevErrors) => {
+      const updatedErrors = { ...prevErrors };
+      delete updatedErrors[name];
+      return updatedErrors;
+    });
+
     if (type === "checkbox" && e.target instanceof HTMLInputElement) {
       const { checked } = e.target;
       setFormData((prev) => ({
@@ -224,8 +231,23 @@ const Leadform = () => {
               )}
             </LabelInputContainer>
             <LabelInputContainer>
-              <Label>Domains of Interest</Label>
-              <div className="flex flex-wrap gap-2">
+              <Label htmlFor="projects">Projects</Label>
+              <textarea
+                id="projects"
+                name="projects"
+                placeholder="Describe the projects you've worked on or are currently working on."
+                value={formData.projects}
+                onChange={handleChange}
+                className="border px-4 py-2 w-full"
+                rows={4}
+              ></textarea>
+              {errors.projects && (
+                <p className="text-red-500 text-sm">{errors.projects}</p>
+              )}
+            </LabelInputContainer>
+            <LabelInputContainer>
+              <Label>Domain of Interest to Lead</Label>
+              <div className="flex flex-wrap gap-4">
                 {[
                   "AR/VR",
                   "AI/ML",
@@ -233,7 +255,7 @@ const Leadform = () => {
                   "Fullstack",
                   "Cloud/DevOps",
                 ].map((interest) => (
-                  <label key={interest} className="flex items-center space-x-2">
+                  <label key={interest} className="flex items-center space-x-0">
                     <input
                       type="checkbox"
                       name="interests"
@@ -254,7 +276,9 @@ const Leadform = () => {
           <div>
             <LabelInputContainer>
               <Label htmlFor="whyJoin">
-                Why do you want to join Devsomeware?
+                Why do you want to join DevSomeware as a Lead, and what are your
+                previous experiences with the particular tech stack? Please
+                share details about your projects.
               </Label>
               <textarea
                 id="whyJoin"
@@ -271,7 +295,8 @@ const Leadform = () => {
             </LabelInputContainer>
             <LabelInputContainer>
               <Label htmlFor="expectations">
-                What are your expectations from Devsomeware?
+                What are your expectations from DevSomeware? Can you commit to
+                this program, and are you eager to contribute to the community?
               </Label>
               <textarea
                 id="expectations"
@@ -291,37 +316,72 @@ const Leadform = () => {
       case 3:
         return (
           <div>
-            <h3 className="text-lg font-bold mb-4">Summary</h3>
-            <p>
-              <strong>Name:</strong> {formData.name}
-            </p>
-            <p>
-              <strong>Email:</strong> {formData.email}
-            </p>
-            <p>
-              <strong>GitHub:</strong> {formData.github}
-            </p>
-            <p>
-              <strong>LinkedIn:</strong> {formData.linkedin}
-            </p>
-            <p>
-              <strong>Languages:</strong> {formData.languages}
-            </p>
-            <p>
-              <strong>Frameworks:</strong> {formData.frameworks}
-            </p>
-            <p>
-              <strong>Projects:</strong> {formData.projects}
-            </p>
-            <p>
-              <strong>Interests:</strong> {formData.interests.join(", ")}
-            </p>
-            <p>
-              <strong>Why Join:</strong> {formData.whyJoin}
-            </p>
-            <p>
-              <strong>Expectations:</strong> {formData.expectations}
-            </p>
+            <h3 className="text-2xl font-bold text-center mb-6">Summary</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {/* Personal Information Box */}
+              <div className="p-4 border rounded-md shadow-sm bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg text-purple-500 font-semibold mb-2">
+                  Personal Information
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Name:</strong> {formData.name}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>Email:</strong> {formData.email}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>GitHub:</strong>{" "}
+                  <a
+                    href={formData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    {formData.github}
+                  </a>
+                </p>
+                <p className="break-words">
+                  <strong>LinkedIn:</strong>{" "}
+                  <a
+                    href={formData.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:underline"
+                  >
+                    {formData.linkedin}
+                  </a>
+                </p>
+              </div>
+              <div className="p-4 border rounded-md shadow-sm  bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold text-purple-500 mb-2">
+                  Technical Background
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Languages:</strong> {formData.languages}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>Frameworks:</strong> {formData.frameworks}
+                </p>
+                <p className="break-words">
+                  <strong>Projects:</strong> {formData.projects}
+                </p>
+              </div>
+
+              <div className="p-4 border rounded-md shadow-sm bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-2 text-purple-500 ">
+                  Motivations
+                </h4>
+                <p className="mb-2 break-words">
+                  <strong>Interests:</strong> {formData.interests.join(", ")}
+                </p>
+                <p className="mb-2 break-words">
+                  <strong>Why Join:</strong> {formData.whyJoin}
+                </p>
+                <p className="break-words">
+                  <strong>Expectations:</strong> {formData.expectations}
+                </p>
+              </div>
+            </div>
           </div>
         );
       default:
@@ -330,16 +390,18 @@ const Leadform = () => {
   };
 
   return (
-    <div className=" lg:max-w-screen-md sm:max-w-screen-sm max-h-screen  mx-auto rounded-none md:rounded-2xl p-4 md:p-12 shadow-input bg-white dark:bg-black mb-4 ">
+    <div
+      className="lg:max-w-screen-md sm:max-w-screen-sm max-h-screen mx-auto rounded-none md:rounded-2xl p-4 md:p-12 shadow-input bg-white dark:bg-black mb-4"
+      style={{ minHeight: "900px" }}
+    >
       <h2 className="font-bold text-3xl text-center text-neutral-800 dark:text-neutral-200 mb-4">
-        Join Devsomeware
+        Join Devsomeware as Lead/Co-lead
       </h2>
       <div className="flex flex-col items-center mb-5">
         {/* Progress Bar */}
-        <div className="flex items-center justify-between w-full sm:ml-[2rem] lg:ml-[8rem] max-w-4xl my-2 ">
+        <div className="flex items-center justify-between w-full sm:ml-[2rem] lg:ml-[8rem] max-w-4xl my-2">
           {steps.map((step, index) => (
             <div key={index} className="flex items-center w-full">
-              {/* Step Circle */}
               <div
                 className={`relative flex items-center justify-center w-12 h-12 rounded-full ${
                   index <= currentStep
@@ -347,14 +409,11 @@ const Leadform = () => {
                     : "bg-gray-300 text-gray-500"
                 }`}
               >
-                {/* Glow Effect for Current Step */}
                 {index === currentStep && (
                   <div className="absolute w-16 h-16 bg-purple-500 opacity-30 rounded-full animate-pulse"></div>
                 )}
                 <span className="z-10 text-lg font-bold">{index + 1}</span>
               </div>
-
-              {/* Connector Line */}
               {index < steps.length - 1 && (
                 <div
                   className={`flex-grow h-1 mx-2 ${
@@ -365,8 +424,6 @@ const Leadform = () => {
             </div>
           ))}
         </div>
-
-        {/* Step Labels */}
         <div className="flex justify-between w-full lg:max-w-[35.5rem] sm:max-w-[34.5rem] mt-4">
           {steps.map((step, index) => (
             <div
@@ -383,31 +440,39 @@ const Leadform = () => {
         </div>
       </div>
 
+      {/* Form */}
       <form onSubmit={handleSubmit}>
-        <div className="mb-6">{renderStepContent()}</div>
+        <div className="mb-6" style={{ minHeight: "200px" }}>
+          {renderStepContent()}
+        </div>
         <div className="flex justify-between">
+          {/* Previous Button */}
           <button
             type="button"
             onClick={handlePrev}
             disabled={currentStep === 0}
-            className="px-4 py-2 bg-gray-300 disabled:bg-gray-200 rounded-md"
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-28 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           >
-            Previous
+            &larr; Previous
+            <BottomGradient />
           </button>
+          {/* Next or Submit Button */}
           {currentStep === steps.length - 1 ? (
             <Link
               href="/verification"
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="bg-gradient-to-br py-2 text-center relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-24 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             >
               Submit
+              <BottomGradient />
             </Link>
           ) : (
             <button
               type="button"
               onClick={handleNext}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md"
+              className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-24 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             >
-              Next
+              Next &rarr;
+              <BottomGradient />
             </button>
           )}
         </div>
@@ -429,5 +494,13 @@ const LabelInputContainer = ({
     {children}
   </div>
 );
+const BottomGradient = () => {
+  return (
+    <>
+      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
+      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+    </>
+  );
+};
 
 export default Leadform;
