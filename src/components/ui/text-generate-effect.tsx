@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -18,8 +18,11 @@ export const TextGenerateEffect = ({
 }: TextGenerateEffectProps) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
+  const isMounted = useRef(true);
 
   useLayoutEffect(() => {
+    isMounted.current = true;
+
     if (scope.current) {
       const elements = scope.current.querySelectorAll(".animated-span");
       console.log("Elements found:", elements.length);
@@ -30,44 +33,52 @@ export const TextGenerateEffect = ({
       }
 
       const loopAnimation = async () => {
-        await animate(
-          ".animated-span",
-          {
-            opacity: [0, 1],
-            filter: filter ? ["blur(10px)", "blur(0px)"] : ["none", "none"],
-          },
-          {
-            duration: duration ? duration : 1,
-            delay: stagger(0.2),
-          }
-        );
+        try {
+          await animate(
+            ".animated-span",
+            {
+              opacity: [0, 1],
+              filter: filter ? ["blur(10px)", "blur(0px)"] : ["none", "none"],
+            },
+            {
+              duration: duration || 1,
+              delay: stagger(0.2),
+            }
+          );
 
-        loopAnimation();
+          if (isMounted.current) {
+            setTimeout(loopAnimation, 1000);
+          }
+        } catch (error) {
+          console.error("Animation error:", error);
+        }
       };
 
       loopAnimation();
     } else {
       console.error("scope.current is null");
     }
+
+    return () => {
+      isMounted.current = false;
+    };
   }, [animate, duration, filter, scope]);
 
-  const renderWords = () => {
-    return (
-      <div ref={scope}>
-        {wordsArray.map((word, idx) => (
-          <span
-            key={`${word}-${idx}`}
-            className="animated-span dark:text-purple-200 text-black opacity-0"
-            style={{
-              filter: filter ? "blur(10px)" : "none",
-            }}
-          >
-            {word}{" "}
-          </span>
-        ))}
-      </div>
-    );
-  };
+  const renderWords = () => (
+    <div ref={scope}>
+      {wordsArray.map((word, idx) => (
+        <span
+          key={`${word}-${idx}`}
+          className="animated-span dark:text-purple-200 text-black opacity-0"
+          style={{
+            filter: filter ? "blur(10px)" : "none",
+          }}
+        >
+          {word}{" "}
+        </span>
+      ))}
+    </div>
+  );
 
   return (
     <div className={cn(className)}>
