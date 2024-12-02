@@ -9,7 +9,10 @@ const JoinUsPage = () => {
 
   const handleRedirect = (path: string) => {
     setLoadingPath(path);
-    router.push(path);
+
+    setTimeout(() => {
+      router.push(path);
+    }, 2000);
   };
 
   return (
