@@ -4,7 +4,7 @@ import Logo from "@/assets/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { navItems } from "@/data/nav.config";
-
+import { UserMenu } from "@/utils/Menu/UserMenu";
 export const Navbar = () => {
   const pathname = usePathname();
 
@@ -38,7 +38,15 @@ export const Navbar = () => {
             <span className="hidden sm:block">{navItem.name}</span>
           </Link>
         ))}
+           <UserMenu 
+  isLoggedIn={true}
+  userName="Basir"
+  userEmail="basir@example.com"
+  userImage=""
+  onLogout={(() => {})}
+/>
       </div>
+   
     </header>
   );
 };

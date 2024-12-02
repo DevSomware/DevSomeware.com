@@ -5,7 +5,7 @@ import clsx from "clsx";
 import NextTopLoader from "nextjs-toploader";
 import { ClientWrapper } from "@/wrapper/ClientWrapper";
 import Cursor from "@/components/ui/cursor";
-
+import StoreProvider from "./StoreProvider";
 const dmSans = DM_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -62,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="relative" suppressHydrationWarning>
       <body className={clsx(dmSans.className, "antialiased bg-black")}>
+        
         <NextTopLoader
           color="#800080"
           initialPosition={0.08}
@@ -80,7 +81,8 @@ export default function RootLayout({
         <div className="hidden md:block">
           <Cursor />
         </div>
-        <ClientWrapper>{children}</ClientWrapper>
+        <ClientWrapper><StoreProvider>{children} </StoreProvider></ClientWrapper>
+       
       </body>
     </html>
   );
