@@ -1,9 +1,11 @@
+import { AnimatedBeamMultipleOutputDemo } from "@/sections/BeamSection";
 import { CardsSection } from "@/sections/CardsSection";
 import GlobeSection from "@/sections/GlobeSection";
 
 import { Hero } from "@/sections/Hero";
 import { LogoMotion } from "@/sections/LogoMotion";
 import { WavyBackgroundDemo } from "@/sections/WavyBackground";
+import { EndSection } from "@/sections/EndSection";
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
       <CardsSection />
       <LogoMotion />
       <GlobeSection />
+      <AnimatedBeamMultipleOutputDemo />
+      <EndSection />
     </>
   );
 }

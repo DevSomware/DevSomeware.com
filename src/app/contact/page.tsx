@@ -142,7 +142,8 @@ const Contact = () => {
           alt="terminal-bg"
           height={800}
           width={1000}
-          className="absolute inset-0 lg:object-cover sm:object-fill lg:w-[70rem] sm:w-[30rem] sm:h-[45rem] lg:h-auto mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          className="absolute inset-0 lg:object-cover sm:object-fill lg:w-[70rem] md:w-[7
+          0rem] sm:w-[30rem] sm:h-[45rem] lg:h-auto mx-auto top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         />
 
         {/* Contact Form */}

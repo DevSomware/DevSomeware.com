@@ -20,6 +20,7 @@
     "@reduxjs/toolkit": "^2.4.0",
     "@tabler/icons-react": "^3.23.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tsparticles/engine": "^3.7.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.7.1",
     "@types/crypto-js": "^4.2.2",

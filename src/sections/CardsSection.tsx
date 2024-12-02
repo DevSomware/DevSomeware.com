@@ -60,7 +60,7 @@ export function CardsSection() {
         "Participate in exciting hackathons, workshops, and meetups to sharpen your skills.",
       icon: Rocket,
       customStyles: "h-[18rem] lg:h-[20rem] lg:w-[20rem]",
-      animationDelay: 0.4,
+      animationDelay: 0.2,
     },
     {
       title: "Developer Networking",
@@ -68,7 +68,7 @@ export function CardsSection() {
         "Connect with like-minded developers and expand your professional network.",
       icon: Users,
       customStyles: "h-[18rem] lg:h-[20rem] lg:w-[20rem]",
-      animationDelay: 0.6,
+      animationDelay: 0.4,
     },
     {
       title: "Learn & Grow",
@@ -76,7 +76,7 @@ export function CardsSection() {
         "Access resources, mentorship, and opportunities to grow as a developer.",
       icon: Code,
       customStyles: "h-[18rem] lg:h-[20rem] lg:w-[20rem] lg:top-20",
-      animationDelay: 0.8,
+      animationDelay: 0.4,
     },
   ];
 
