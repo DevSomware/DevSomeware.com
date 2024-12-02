@@ -86,9 +86,11 @@ export default function RootLayout({
           <div className="hidden md:block">
             <Cursor />
           </div>
+          <StoreProvider>
           <ClientWrapper>
-            <StoreProvider>{children}</StoreProvider>
+            {children}
           </ClientWrapper>
+          </StoreProvider>
         </ThemeProvider>
       </body>
     </html>

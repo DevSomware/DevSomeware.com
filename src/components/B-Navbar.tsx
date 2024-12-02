@@ -91,13 +91,7 @@ export default function BottomNavbar() {
                 </DockIcon>
               );
             })}
-                  <div className="m-2"><UserMenu 
-  isLoggedIn={true}
-  userName="Basir"
-  userEmail="basir@example.com"
-  userImage=""
-  onLogout={(() => {})}
-/>
+                  <div className="m-2"><UserMenu/>
 </div>
           </Dock>
           
