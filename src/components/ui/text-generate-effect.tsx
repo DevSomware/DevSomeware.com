@@ -1,59 +1,71 @@
 "use client";
-import { useEffect } from "react";
-import { motion, stagger, useAnimate } from "framer-motion";
+import { useLayoutEffect } from "react";
+import { stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
+
+interface TextGenerateEffectProps {
+  words: string;
+  className?: string;
+  filter?: boolean;
+  duration?: number;
+}
 
 export const TextGenerateEffect = ({
   words,
   className,
   filter = true,
   duration = 0.5,
-}: {
-  words: string;
-  className?: string;
-  filter?: boolean;
-  duration?: number;
-}) => {
+}: TextGenerateEffectProps) => {
   const [scope, animate] = useAnimate();
   const wordsArray = words.split(" ");
 
-  useEffect(() => {
-    const loopAnimation = async () => {
-      while (true) {
+  useLayoutEffect(() => {
+    if (scope.current) {
+      const elements = scope.current.querySelectorAll(".animated-span");
+      console.log("Elements found:", elements.length);
+
+      if (elements.length === 0) {
+        console.error("No elements found with the selector '.animated-span'");
+        return;
+      }
+
+      const loopAnimation = async () => {
         await animate(
-          "span", // Target all span elements
+          ".animated-span",
           {
-            opacity: [0, 1], // Fade in only
+            opacity: [0, 1],
             filter: filter ? ["blur(10px)", "blur(0px)"] : ["none", "none"],
           },
           {
             duration: duration ? duration : 1,
-            delay: stagger(0.2), // Sequential delay for each span
+            delay: stagger(0.2),
           }
         );
-      }
-    };
 
-    if (scope) {
+        loopAnimation();
+      };
+
       loopAnimation();
+    } else {
+      console.error("scope.current is null");
     }
   }, [animate, duration, filter, scope]);
 
   const renderWords = () => {
     return (
-      <motion.div ref={scope}>
+      <div ref={scope}>
         {wordsArray.map((word, idx) => (
-          <motion.span
-            key={word + idx}
-            className="dark:text-purple-200 text-black opacity-0"
+          <span
+            key={`${word}-${idx}`}
+            className="animated-span dark:text-purple-200 text-black opacity-0"
             style={{
               filter: filter ? "blur(10px)" : "none",
             }}
           >
             {word}{" "}
-          </motion.span>
+          </span>
         ))}
-      </motion.div>
+      </div>
     );
   };
 
