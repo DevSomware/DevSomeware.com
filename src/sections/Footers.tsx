@@ -1,25 +1,84 @@
 import Logo from "@/assets/logo.svg";
 import Image from "next/image";
+import { Github, Instagram, Linkedin, X, Hash, Send } from "lucide-react";
 
 export const Footers = () => {
-    return (
-       <footer className="py-5 border-t border-white/15">
-          <div className="container mx-auto px-4">
-             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                {/* Left Side: Logo and Title */}
-                <div className="flex items-center gap-2">
-                   <Image src={Logo} alt="DWS Logo" width={80} height={20} className="sm:w-20 sm:h-6 md:w-24 md:h-8 lg:w-28 lg:h-10" />
-                   {/* <div className="font-medium text-white text-sm sm:text-base md:text-lg lg:text-xl">
-                      DevSomeware
-                   </div> */}
-                </div>
-
-                {/* Right Side: All Rights Reserved */}
-                <div className="font-medium text-white text-xs sm:text-sm md:text-base lg:text-lg text-center md:text-right">
-                   All rights reserved devsomeware.com   
-                </div>
-             </div>
+  return (
+    <footer className="bg-black py-8 border-t border-gray-700">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Left Side: Logo and Title */}
+          <div className="flex items-center gap-3">
+            <Image
+              src={Logo}
+              alt="DevSomeware Logo"
+              width={100}
+              height={30}
+              className="w-24 h-auto"
+            />
+            <div className="font-bold text-white text-lg sm:text-xl md:text-2xl">
+              DevSomeware
+            </div>
           </div>
-       </footer> 
-    );
+
+          {/* Center: Social Icons */}
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/DevSomware  
+"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <Github className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+            <a
+              href="https://www.instagram.com/devsomeware/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <Instagram className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/devsomeware/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <Linkedin className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+            <a
+              href="https://x.com/DevSomware"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <X className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+            <a
+              href="https://hashnode.com/@devsomeware"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <Hash className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+            <a
+              href="https://www.threads.net/@devsomeware?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-purple-500"
+            >
+              <Send className="w-6 h-6 sm:w-7 sm:h-7" />
+            </a>
+          </div>
+
+          <div className="text-gray-400 text-xs sm:text-sm md:text-base text-center md:text-right">
+            © {new Date().getFullYear()} DevSomeware. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 };

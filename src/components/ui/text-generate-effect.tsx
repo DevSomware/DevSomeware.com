@@ -21,26 +21,14 @@ export const TextGenerateEffect = ({
     const loopAnimation = async () => {
       while (true) {
         await animate(
-          "span",
+          "span", // Target all span elements
           {
-            opacity: 1,
-            filter: filter ? "blur(0px)" : "none",
+            opacity: [0, 1], // Fade in only
+            filter: filter ? ["blur(10px)", "blur(0px)"] : ["none", "none"],
           },
           {
             duration: duration ? duration : 1,
-            delay: stagger(0.2),
-          }
-        );
-
-        await animate(
-          "span",
-          {
-            opacity: 0,
-            filter: filter ? "blur(10px)" : "none",
-          },
-          {
-            duration: duration ? duration : 1,
-            delay: stagger(0.2),
+            delay: stagger(0.2), // Sequential delay for each span
           }
         );
       }
