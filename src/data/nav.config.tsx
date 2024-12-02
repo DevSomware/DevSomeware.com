@@ -1,8 +1,8 @@
 import {
   HomeIcon,
   Contact,
-  NotebookIcon,
-  UsersRound,
+  Users,
+  Merge,
   Calendar,
   BookUser,
 } from "lucide-react";
@@ -28,9 +28,9 @@ export const navItems = [
   },
   {
     id: 4,
-    link: "/blogs",
-    icon: <NotebookIcon className="h-5 w-5 text-neutral-500 dark:text-white" />,
-    name: "Blogs",
+    link: "/team",
+    icon: <Users className="h-5 w-5 text-neutral-500 dark:text-white" />,
+    name: "Team",
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ export const navItems = [
   {
     id: 6,
     link: "/join",
-    icon: <UsersRound className="h-5 w-5 text-neutral-500 dark:text-white" />,
+    icon: <Merge className="h-5 w-5 text-neutral-500 dark:text-white" />,
     name: "Join Us",
   },
 ];
