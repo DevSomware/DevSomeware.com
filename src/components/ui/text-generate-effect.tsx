@@ -46,25 +46,25 @@ export const TextGenerateEffect = ({
       }
     };
 
-    loopAnimation();
-  }, [animate, duration, filter]);
+    if (scope) {
+      loopAnimation();
+    }
+  }, [animate, duration, filter, scope]);
 
   const renderWords = () => {
     return (
       <motion.div ref={scope}>
-        {wordsArray.map((word, idx) => {
-          return (
-            <motion.span
-              key={word + idx}
-              className="dark:text-purple-200  text-black opacity-0"
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
-            >
-              {word}{" "}
-            </motion.span>
-          );
-        })}
+        {wordsArray.map((word, idx) => (
+          <motion.span
+            key={word + idx}
+            className="dark:text-purple-200 text-black opacity-0"
+            style={{
+              filter: filter ? "blur(10px)" : "none",
+            }}
+          >
+            {word}{" "}
+          </motion.span>
+        ))}
       </motion.div>
     );
   };

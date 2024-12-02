@@ -57,7 +57,7 @@ export function AnimatedBeamMultipleOutputDemo({
       </motion.h1>
       <div
         className={cn(
-          "relative  flex h-[500px] lg:w-[700px] sm:w-[500px] -mt-[10rem]  items-center justify-center overflow-hidden rounded-lg d p-10 md:shadow-xl",
+          "relative overflow-x-hidden flex h-[500px] lg:w-[700px] sm:w-[370px] -mt-[10rem]  items-center justify-center overflow-hidden rounded-lg d p-10 md:shadow-xl",
           className
         )}
         ref={containerRef}
