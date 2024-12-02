@@ -51,7 +51,7 @@ export const LogoMotion = () => {
   ];
 
   return (
-    <section className="lg:py-10 md:py-8 sm:py-2">
+    <section className="lg:py-10 md:py-8 sm:py-2 min-w-screen">
       <div className="container">
         <div className="flex items-center gap-5">
           <div className="flex flex-1 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_20%,black_80%,transparent)]">
