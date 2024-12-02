@@ -7,7 +7,7 @@ import { ClientWrapper } from "@/wrapper/ClientWrapper";
 import Cursor from "@/components/ui/cursor";
 import StoreProvider from "./StoreProvider";
 const dmSans = DM_Sans({ subsets: ["latin"] });
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "@/components/theme-provider";
 export const metadata: Metadata = {
   metadataBase: new URL("https://devsomeware.com"),
   title: "DevSomeware - Open Source Developer Community",
@@ -62,7 +62,6 @@ export default function RootLayout({
   return (
     <html lang="en" className="relative" suppressHydrationWarning>
       <body className={clsx(dmSans.className, "antialiased bg-black")}>
-        
         <NextTopLoader
           color="#800080"
           initialPosition={0.08}
@@ -78,16 +77,18 @@ export default function RootLayout({
           zIndex={1600}
           showAtBottom={false}
         />
-         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-        <div className="hidden md:block">
-          <Cursor />
-        </div>
-        <ClientWrapper><StoreProvider>{children} </StoreProvider></ClientWrapper>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="hidden md:block">
+            <Cursor />
+          </div>
+          <ClientWrapper>
+            <StoreProvider>{children}</StoreProvider>
+          </ClientWrapper>
         </ThemeProvider>
       </body>
     </html>
