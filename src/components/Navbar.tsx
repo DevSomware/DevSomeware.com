@@ -39,11 +39,6 @@ export const Navbar = () => {
           </Link>
         ))}
            <UserMenu 
-  isLoggedIn={true}
-  userName="Basir"
-  userEmail="basir@example.com"
-  userImage=""
-  onLogout={(() => {})}
 />
       </div>
    
