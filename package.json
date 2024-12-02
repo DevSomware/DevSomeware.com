@@ -15,6 +15,7 @@
     "@radix-ui/react-separator": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.4",
     "@react-three/fiber": "^8.17.10",
+    "@reduxjs/toolkit": "^2.4.0",
     "@tabler/icons-react": "^3.23.0",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/nodemailer": "^6.4.16",
@@ -31,6 +32,7 @@
     "nodemailer": "^6.9.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.1.2",
     "simplex-noise": "^4.0.3",
     "tailwind-merge": "^2.5.5",
     "three": "^0.170.0"
