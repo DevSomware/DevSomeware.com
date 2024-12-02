@@ -1,3 +1,4 @@
+import { AnimatedBeamMultipleOutputDemo } from "@/sections/BeamSection";
 import { CardsSection } from "@/sections/CardsSection";
 import GlobeSection from "@/sections/GlobeSection";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <CardsSection />
       <LogoMotion />
       <GlobeSection />
+      <AnimatedBeamMultipleOutputDemo />
     </>
   );
 }

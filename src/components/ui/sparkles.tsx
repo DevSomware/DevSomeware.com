@@ -44,7 +44,7 @@ export function Sparkles({
   direction = "none" as const,
   opacitySpeed = 3,
   minOpacity = null,
-  color = "#9C27B0",
+  color = "#6a0dad",
   mousemove = false,
   hover = false,
   background = "transparent",
