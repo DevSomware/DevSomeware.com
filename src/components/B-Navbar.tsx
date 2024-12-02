@@ -1,6 +1,7 @@
 "use client";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { buttonVariants } from "@/components/ui/button";
+import { UserMenu } from "@/utils/Menu/UserMenu";
 import {
   Tooltip,
   TooltipContent,
@@ -90,7 +91,16 @@ export default function BottomNavbar() {
                 </DockIcon>
               );
             })}
+                  <div className="m-2"><UserMenu 
+  isLoggedIn={true}
+  userName="Basir"
+  userEmail="basir@example.com"
+  userImage=""
+  onLogout={(() => {})}
+/>
+</div>
           </Dock>
+          
         </TooltipProvider>
 
         {pressedIcon && (
@@ -100,7 +110,9 @@ export default function BottomNavbar() {
             </p>
           </div>
         )}
+  
       </div>
+      
     </div>
   );
 }
