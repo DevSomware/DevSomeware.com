@@ -13,7 +13,7 @@ const JoinUsPage = () => {
   };
 
   return (
-    <div className="h-auto min-h-screen w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center py-12">
+    <div className="h-auto min-h-screen w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center py-12 overflow-x-hidden">
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
 
       <div className="relative z-20 text-center mb-12">
@@ -29,9 +29,9 @@ const JoinUsPage = () => {
         </p>
       </div>
 
-      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-2 lg:gap-24 sm:-gap-0 -top-10 max-w-5xl w-full px-6">
+      <div className="relative z-20 grid grid-cols-1 lg:grid-cols-2 lg:gap-24 sm:gap-6 -top-10 max-w-5xl w-full px-6">
         <PinContainer title="Join as Member" href="/joinf">
-          <div className="flex flex-col lg:w-[30rem] sm:w-[20rem] p-4  bg-gradient-to-br  from-neutral-900 via-blsck-500 to-neutral-900 text-white rounded-lg shadow-lg">
+          <div className="flex flex-col lg:w-[30rem] sm:w-[20rem] p-4 bg-gradient-to-br from-neutral-900 via-black to-neutral-900 text-white rounded-lg shadow-lg">
             <h3 className="text-2xl bg-gradient-to-b text-transparent bg-clip-text from-neutral-200 to-purple-500 font-bold mb-4">
               {memberContent.title}
             </h3>
@@ -52,8 +52,8 @@ const JoinUsPage = () => {
           </div>
         </PinContainer>
 
-        <PinContainer title="Apply as Lead/Co-Lead" href="leadf">
-          <div className="flex flex-col lg:w-[30rem] sm:w-[20rem]  p-4 bg-gradient-to-br from-neutral-900 via-blsck-500 to-neutral-900 text-white rounded-lg shadow-lg">
+        <PinContainer title="Apply as Lead/Co-Lead" href="/leadf">
+          <div className="flex flex-col lg:w-[30rem] sm:w-[20rem] p-4 bg-gradient-to-br from-neutral-900 via-black to-neutral-900 text-white rounded-lg shadow-lg">
             <h3 className="text-2xl font-bold mb-4 bg-gradient-to-b text-transparent bg-clip-text from-neutral-200 to-purple-500">
               {leadContent.title}
             </h3>
