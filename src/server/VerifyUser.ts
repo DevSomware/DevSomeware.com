@@ -2,8 +2,10 @@
 import { cookies } from "next/headers"
 import Users from "@/models/Users";
 import jwt from "jsonwebtoken";
+import ConnectDb from "@/middleware/connectDb";
 const VerifyUser= async()=>{
     const cookie = cookies();
+    await ConnectDb();
     const token:any = cookie.get("token");
     if(token){
         const decoded:any = jwt.verify(token.value, process.env.JWT_SECRET || "");
