@@ -6,7 +6,6 @@ import { Toaster, toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { add } from "@/lib/features/user/userSlice";
 import { ButtonGradient } from "@/components/ui/ButtonGradient";
 import { LabelInputContainer } from "@/components/ui/LabelInputContainer";
