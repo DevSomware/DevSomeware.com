@@ -22,7 +22,7 @@ function SignupFormDemo() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email,
+        email:email.toLowerCase(),
       }),
     });
     const data = await fetchdata.json();

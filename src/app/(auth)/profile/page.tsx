@@ -195,6 +195,7 @@ const ProfilePage = () => {
                   "Fullstack",
                   "Cloud/DevOps",
                   "AR/VR",
+                  "Cybersecurity",
                 ].map((interest) => (
                   <label key={interest} className="inline-flex items-center">
                     <input

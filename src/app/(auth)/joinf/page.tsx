@@ -134,7 +134,7 @@ const Joiningform = () => {
       },
       body: JSON.stringify({
         name: formData.name,
-        email: formData.email,
+        email: formData.email.toLowerCase(),
         password: formData.password,
         github: formData.github,
         linkedin: formData.linkedin,

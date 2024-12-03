@@ -16,7 +16,7 @@ export const POST = async (req: NextRequest) => {
             img:data.img,
             github:data.github,
             linkedin:data.linkedin,
-            intrests:data.interests,
+            intrests:data.intrests,
             languages:data.languages,
             frameworks:data.frameworks,
             projects:data.projects,

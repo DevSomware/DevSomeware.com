@@ -134,7 +134,7 @@ const Leadform = () => {
       },
       body: JSON.stringify({
         name: formData.name,
-        email: formData.email,
+        email: formData.email.toLowerCase(),
         projects: formData.projects,
         github: formData.github,
         linkedin: formData.linkedin,
@@ -150,7 +150,7 @@ const Leadform = () => {
       if(response.success){
 toast.success("Your lead/co-lead application has been submitted successfully");
 setTimeout(() => {  
-  toast.success("Keeo an eye on your email inbox for further updates");
+  toast.success("Keep an eye on your email inbox for further updates");
   setTimeout(() => {
     router.push("/verification");
   },1500)
