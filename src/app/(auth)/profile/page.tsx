@@ -138,7 +138,7 @@ const ProfilePage = () => {
           // Edit Mode
           <div className="my-8  relative">
             <div className="flex flex-col items-center mb-8">
-              <Image
+              <img
                 src={formData.img || "/profile.jpg"}
                 alt="Profile Photo"
                 width={96}
@@ -299,7 +299,7 @@ const ProfilePage = () => {
           // View Mode
           <div className="my-8 relative">
             <div className="flex flex-col items-center mb-8">
-              <Image
+              <img
                 src={user.img || "/profile.jpg"}
                 alt="Profile Photo"
                 width={120}
