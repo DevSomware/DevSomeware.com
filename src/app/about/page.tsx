@@ -71,7 +71,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaDiscord className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaDiscord className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://x.com/DevSomware"
@@ -79,7 +79,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaTwitter className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaTwitter className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://www.instagram.com/devsomeware/"
@@ -87,7 +87,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaInstagram className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaInstagram className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://www.linkedin.com/company/devsomeware/"
@@ -95,7 +95,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaLinkedin className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaLinkedin className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://github.com/DevSomware"
@@ -103,7 +103,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaGithub className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaGithub className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://www.threads.net/@devsomeware?hl=en"
@@ -111,7 +111,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <CiAt className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <CiAt className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
         <a
           href="https://hashnode.com/@devsomeware"
@@ -119,7 +119,7 @@ export default function AboutPage() {
           rel="noopener noreferrer"
           className="hover:text-purple-500"
         >
-          <FaHashtag className="text-8xl animate-float hover:scale-110 transition-transform glow-effect" />
+          <FaHashtag className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
         </a>
       </div>
     </div>
