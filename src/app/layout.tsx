@@ -6,8 +6,11 @@ import NextTopLoader from "nextjs-toploader";
 import { ClientWrapper } from "@/wrapper/ClientWrapper";
 import Cursor from "@/components/ui/cursor";
 import StoreProvider from "./StoreProvider";
-const dmSans = DM_Sans({ subsets: ["latin"] });
 import { ThemeProvider } from "@/components/theme-provider";
+import VerifyUser from "@/server/VerifyUser";
+
+const dmSans = DM_Sans({ subsets: ["latin"] });
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://devsomeware.com"),
   title: "DevSomeware - Open Source Developer Community",
@@ -54,11 +57,34 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+  let initialUserData = null;
+
+  try {
+    const [isauth, users] = await VerifyUser();
+    const user = typeof users === 'string' ? JSON.parse(users) : null;
+
+    if (isauth) {
+      initialUserData = {
+        name: user.name,
+        email: user.email,
+        img: user.img,
+        isauth: true,
+        github: user.github,
+        linkedin: user.linkedin,
+        intrests: user.intrests,
+        languages: user.languages,
+        frameworks: user.frameworks,
+      };
+    }
+  } catch (error) {
+    console.error("Error verifying user:", error);
+  }
+
   return (
     <html lang="en" className="relative" suppressHydrationWarning>
       <body className={clsx(dmSans.className, "antialiased bg-black")}>
@@ -86,10 +112,8 @@ export default function RootLayout({
           <div className="hidden md:block">
             <Cursor />
           </div>
-          <StoreProvider>
-          <ClientWrapper>
-            {children}
-          </ClientWrapper>
+          <StoreProvider initialUserData={initialUserData}>
+            <ClientWrapper>{children}</ClientWrapper>
           </StoreProvider>
         </ThemeProvider>
       </body>
