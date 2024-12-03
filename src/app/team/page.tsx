@@ -204,8 +204,8 @@ export default function TeamPage() {
             name="Aryan Ashima Swain"
             role="Team Member"
             image={Aryan}
-            github="https://www.linkedin.com/in/aryan-ashima-swain-8727b4300/"
-            linkedin="https://github.com/SARYAN23"
+            github="https://github.com/SARYAN23"
+            linkedin="https://www.linkedin.com/in/aryan-ashima-swain-8727b4300/" 
           />
           <MemberCard
             name="Khawar Ahmed Khan"
