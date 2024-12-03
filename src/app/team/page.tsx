@@ -10,6 +10,9 @@ import Ankit from "@/assets/ankit.jpg";
 import Khawar from "@/assets/khawar.jpeg";
 import Aryan from "@/assets/aryan.jpg";
 import WatermarkLogo from "@/assets/logo.png";
+import Mir from "@/assets/mir.jpg";
+import Nyaya from "@/assets/nyaya.jpg";
+import Saneev from "@/assets/saneev.webp";
 import { StaticImageData } from "next/image";
 
 const MentorCard = () => (
@@ -26,7 +29,7 @@ const MentorCard = () => (
     {/* Image */}
     <div className="w-full rounded-t-md h-[350px] group-hover:h-[410px] overflow-hidden transition-all duration-300">
       <Image
-        src={Swagat}
+        src={Saneev}
         alt="mentor"
         width={600}
         height={600}
@@ -130,7 +133,7 @@ export default function TeamPage() {
           <MemberCard
             name="Nyayabrata Das"
             role="Core Community Lead"
-            image={Swagat}
+            image={Nyaya}
           />
         </div>
       </div>
@@ -142,7 +145,7 @@ export default function TeamPage() {
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
           <MemberCard name="Disha Mishra" role="Team Member" image={Disha} />
-          <MemberCard name="Mir Sadab Ali" role="Team Member" image={Swagat} />
+          <MemberCard name="Mir Sadab Ali" role="Team Member" image={Mir} />
           <MemberCard
             name="Bhawani Sankar Das"
             role="Team Member"

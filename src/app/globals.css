@@ -109,6 +109,25 @@ body {
     transform: translateY(-15px);
   }
 }
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.glow-effect {
+  filter: drop-shadow(0 0 10px #7c3aed);
+}
 
 @layer base {
   :root {
