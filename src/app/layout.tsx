@@ -79,6 +79,7 @@ export default async function RootLayout({
         intrests: user.intrests,
         languages: user.languages,
         frameworks: user.frameworks,
+        bio: user.bio,
       };
     }
   } catch (error) {

@@ -11,6 +11,7 @@ interface userState {
   languages:string,
   frameworks:string,
   isauth:boolean,
+  bio:string,
 }
 
 // Define the initial state using that type
@@ -24,6 +25,7 @@ const initialState: userState = {
     languages:"",
     frameworks:"",
     isauth:false,
+    bio:"",
 }
 
 export const userSlice = createSlice({
@@ -41,6 +43,7 @@ export const userSlice = createSlice({
     state.languages=action.payload.languages
     state.frameworks=action.payload.frameworks
     state.isauth=action.payload.isauth
+    state.bio=action.payload.bio
    },
   },
 })

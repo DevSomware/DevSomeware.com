@@ -92,6 +92,10 @@ function SignupFormDemo() {
             )}
             <BottomGradient />
           </button>
+          <div className="flex justify-center items-center mt-4">
+          <span className="text-sm text-neutral-700 dark:text-neutral-300 ">Don’t have an account? <Link href="/join" className="underline text-green-500 mx-1">Create an account</Link>
+        </span>
+        </div>
 
           <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 

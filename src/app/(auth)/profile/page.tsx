@@ -6,7 +6,6 @@ import { Toaster, toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import Image from "next/image";
 import { add } from "@/lib/features/user/userSlice";
 import { ButtonGradient } from "@/components/ui/ButtonGradient";
@@ -22,7 +21,6 @@ interface UserState {
   email: string;
   isauth: boolean;
   intrests?: string[];
-  role?: string;
 }
 
 interface FormData {
@@ -65,38 +63,70 @@ const ProfilePage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (img:string) => {
     setLoading(true);
-    try {
-      const response = await axios.put("/api/auth/profile", formData);
-      if (response.status === 200) {
-        dispatch(add({ ...response.data, isauth: true }));
-        toast.success("Profile updated successfully");
-        setIsEditing(false);
-      } else {
-        toast.error("Failed to update profile");
-      }
-    } catch (error) {
-      console.error("Error updating profile:", error);
-      toast.error("Error updating profile");
-    } finally {
-      setLoading(false);
+    try{
+    const fetchdata = await fetch("/api/profile", {
+      method: "POST",
+      body: JSON.stringify({...formData,email:user.email,img:img}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const response = await fetchdata.json();
+    setLoading(false);
+    if(response.success){
+      toast.success("Profile updated successfully");
+      setIsEditing(false);
+      dispatch(add({name:response.data.name,bio:response.data.bio,frameworks:response.data.frameworks,languages:response.data.languages,img:response.data.img,email:response.data.email,isauth:true,intrests:response.data.intrests}));
     }
+    else{
+      toast.error(response.message);
+    }
+  }
+    catch(err){
+      console.log(err);
+      setLoading(false);
+      toast.error("Error while updating profile");
+    }
+
+    //
+        // toast.success("Profile updated successfully");
+        // setIsEditing(false);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({ ...prev, img: imageUrl }));
-    }
+      setLoading(true);
+      const data = new FormData();
+      data.append("file", file as Blob);
+      data.append("upload_preset", "ml_default");
+      data.append("cloud_name", "db0x5vhbk");
+      fetch("https://api.cloudinary.com/v1_1/db0x5vhbk/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+        
+          console.log(data.url);
+          setLoading(false);
+          toast.success("Image uploaded successfully");
+          handleSubmit(data.url);
+          
+        }).catch((err) => {
+          console.log(err);
+          setLoading(false);
+          toast.error("Error while uploading image");
+        });
   };
 
   return (
     <div className="min-h-screen dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] flex items-center justify-center">
+      <Toaster richColors />
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="lg:w-[80rem] sm:w-[22rem] mt-10  mb-10 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input backdrop-blur-sm border border-purple-500  relative">
-        <Toaster richColors />
+      <div className="lg:w-[80rem] sm:w-[22rem] mt-10  mb-10 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input backdrop-blur-sm border border-gray-900  relative">
+        
         <h2 className="font-bold text-3xl text-center text-neutral-800 dark:text-neutral-200">
           Your Profile
         </h2>
@@ -126,6 +156,7 @@ const ProfilePage = () => {
                 <div className="flex items-center justify-center bg-violet-50 text-violet-700 hover:bg-violet-100 p-2 rounded-full shadow-md">
                   <FaUpload className="text-lg" />
                   <span className="ml-2 text-sm font-medium">Upload Photo</span>
+                  {loading&&<Loader2 className="mx-2 mr-2 h-5 w-5 animate-spin" />}
                 </div>
               </label>
             </div>
@@ -231,16 +262,6 @@ const ProfilePage = () => {
             </LabelInputContainer>
 
             {/* Role (non-editable) */}
-            <LabelInputContainer className="mb-4">
-              <Label htmlFor="role">Role</Label>
-              <Input
-                id="role"
-                name="role"
-                placeholder="Your Role"
-                value={user.role}
-                disabled
-              />
-            </LabelInputContainer>
 
             {/* Save and Cancel Buttons */}
             <div className="flex space-x-4">
@@ -248,7 +269,7 @@ const ProfilePage = () => {
                 className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900
               dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white
               rounded-md h-10 font-medium"
-                onClick={handleSubmit}
+                onClick={() => handleSubmit(formData.img)}
                 disabled={loading}
               >
                 {loading ? (
@@ -290,7 +311,7 @@ const ProfilePage = () => {
               {/* Name */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Name
+                  Name:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl font-bold text-gray-800 dark:text-gray-100">
                   {user.name}
@@ -300,7 +321,7 @@ const ProfilePage = () => {
               {/* Email */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Email
+                  Email:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
                   {user.email}
@@ -310,7 +331,7 @@ const ProfilePage = () => {
               {/* Selected Domain */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Selected Domain
+                  Selected Domain:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
                   {user.intrests?.join(", ")}
@@ -320,7 +341,7 @@ const ProfilePage = () => {
               {/* Bio */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Bio
+                  Bio:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
                   {user.bio}
@@ -330,7 +351,7 @@ const ProfilePage = () => {
               {/* Frameworks Known */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Frameworks Known
+                  Frameworks Known:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
                   {user.frameworks}
@@ -340,20 +361,10 @@ const ProfilePage = () => {
               {/* Languages */}
               <div className="mb-6">
                 <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Languages
+                  Languages:
                 </Label>
                 <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
                   {user.languages}
-                </p>
-              </div>
-
-              {/* Role */}
-              <div className="mb-6">
-                <Label className="text-lg font-semibold text-gray-600 dark:text-gray-300">
-                  Role
-                </Label>
-                <p className="lg:text-2xl sm:text-xl text-gray-800 dark:text-gray-100">
-                  {user.role}
                 </p>
               </div>
 

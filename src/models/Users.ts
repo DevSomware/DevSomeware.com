@@ -47,7 +47,11 @@ const UserSchema = new mongoose.Schema({
     expectations:{
         type: String,
         required: false
-    }
+    },
+    bio:{
+        type: String,
+        required: false
+    },
 },{timestamps:true});
 export default mongoose.models.Users || mongoose.model("Users",UserSchema);
 

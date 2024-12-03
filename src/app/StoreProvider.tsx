@@ -19,6 +19,7 @@ export default function StoreProvider({
     intrests: string[];
     languages: string[];
     frameworks: string[];
+    bio: string;
   } | null;
 }) {
   const storeRef = useRef<AppStore>();
