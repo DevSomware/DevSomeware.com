@@ -94,7 +94,7 @@ export function TechSection() {
         Coping with Rapidly <br /> Evolving <Cover>Technology</Cover>
       </motion.h1>
       <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between px-4 lg:px-16 ">
-        <div className="lg:w-1/2 w-full lg:mt-16 lg:ml-14 lg:mr-8 mb-8 lg:mb-0 overflow-hidden">
+        <div className="lg:w-1/2 w-full lg:mt-16 lg:ml-14 lg:mr-8 mb-8 lg:mb-0 z-0 overflow-hidden">
           <AnimatedTestimonials testimonials={testimonials} />
         </div>
         <div className="lg:w-1/2 w-full flex justify-center">
