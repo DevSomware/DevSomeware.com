@@ -56,8 +56,8 @@ const sendEmail = async(name:string,email:string)=>{
           const info = await transporter.sendMail({
             from: '"DevSomeware" <account@devsomeware.com>', // sender address
             to: email, // list of receivers
-            subject: "Devsomeware: User Password Reset Request", // Subject line
-            text: "Hello world?", // plain text body
+            subject: "Your Profile Was Successfully Updated on DevSomeware 🚀", // Subject line
+            text: "Your Profile Was Successfully Updated on DevSomeware ", // plain text body
             html: `
            <!DOCTYPE html>
 <html lang="en">
