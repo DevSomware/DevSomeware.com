@@ -2,6 +2,15 @@
 import React from "react";
 import { SparklesCore } from "@/components/ui/sparkles1";
 import { LogoMotion } from "@/sections/LogoMotion";
+import {
+  FaDiscord,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedin,
+  FaGithub,
+  FaHashtag,
+} from "react-icons/fa";
+import { CiAt } from "react-icons/ci";
 
 export default function AboutPage() {
   return (
@@ -50,6 +59,69 @@ export default function AboutPage() {
         </p>
       </div>
       <LogoMotion />
+
+      {/* Social Media Handles Section */}
+      <h2 className="text-5xl font-bold text-center text-white mt-16">
+        Social Media Handles
+      </h2>
+      <div className="mt-12 flex flex-wrap justify-center mb-20 gap-12 text-white">
+        <a
+          href="https://discord.gg/QkRpF8r9dv"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaDiscord className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://x.com/DevSomware"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaTwitter className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://www.instagram.com/devsomeware/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaInstagram className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://www.linkedin.com/company/devsomeware/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaLinkedin className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://github.com/DevSomware"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaGithub className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://www.threads.net/@devsomeware?hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <CiAt className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+        <a
+          href="https://hashnode.com/@devsomeware"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-purple-500"
+        >
+          <FaHashtag className="lg:text-8xl sm:text-5xl animate-float hover:scale-110 transition-transform glow-effect" />
+        </a>
+      </div>
     </div>
   );
 }

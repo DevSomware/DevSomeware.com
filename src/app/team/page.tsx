@@ -10,11 +10,15 @@ import Ankit from "@/assets/ankit.jpg";
 import Khawar from "@/assets/khawar.jpeg";
 import Aryan from "@/assets/aryan.jpg";
 import WatermarkLogo from "@/assets/logo.png";
+import Mir from "@/assets/mir.jpg";
+import Nyaya from "@/assets/nyaya.jpg";
+import Saneev from "@/assets/saneev.webp";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { StaticImageData } from "next/image";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 
 const MentorCard = () => (
   <div className="w-[350px] relative mt-4 h-[430px] group mx-auto dark:bg-black bg-white dark:border-2 border-purple-500 border rounded-md dark:text-white text-black flex flex-col">
-    {/* Watermark */}
     <div className="absolute top-2 left-2 w-[5rem] h-10 z-10 opacity-100">
       <Image
         src={WatermarkLogo}
@@ -26,7 +30,7 @@ const MentorCard = () => (
     {/* Image */}
     <div className="w-full rounded-t-md h-[350px] group-hover:h-[410px] overflow-hidden transition-all duration-300">
       <Image
-        src={Swagat}
+        src={Saneev}
         alt="mentor"
         width={600}
         height={600}
@@ -51,10 +55,14 @@ const MemberCard = ({
   name,
   role,
   image,
+  github,
+  linkedin,
 }: {
   name: string;
   role: string;
   image: StaticImageData;
+  github: string;
+  linkedin: string;
 }) => (
   <div className="w-[350px] relative mt-4 h-[430px] group mx-auto dark:bg-black bg-white dark:border-2 border-purple-500 border rounded-md dark:text-white text-black flex flex-col">
     {/* Watermark */}
@@ -65,6 +73,25 @@ const MemberCard = ({
         layout="responsive"
         objectFit="contain"
       />
+    </div>
+    {/* Social Icons */}
+    <div className="absolute top-2 right-2 flex flex-col gap-2 z-20">
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 bg-white dark:bg-black border border-purple-500 rounded-full hover:scale-110 transition-transform flex items-center justify-center"
+      >
+        <FaGithub className="text-purple-500 text-lg" />
+      </a>
+      <a
+        href={linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="p-2 bg-white dark:bg-black border border-purple-500 rounded-full hover:scale-110 transition-transform flex items-center justify-center"
+      >
+        <FaLinkedin className="text-purple-500 text-lg" />
+      </a>
     </div>
     {/* Image */}
     <div className="w-full rounded-t-md h-[350px] group-hover:h-[410px] overflow-hidden transition-all duration-300">
@@ -92,15 +119,16 @@ const MemberCard = ({
 
 export default function TeamPage() {
   return (
-    <div className="h-auto w-full dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center justify-center overflow-hidden rounded-md">
+    <div className="h-auto w-full  dark:bg-black bg-white dark:bg-dot-white/[0.2] bg-dot-black/[0.2] relative flex flex-col items-center justify-center lg:-mt-20 sm:mt-3 overflow-hidden rounded-md">
+      <TextHoverEffect text="Meet Our Team" />
+
       {/* Mentor Section */}
-      <div className="mt-16">
+      <div className="lg:-mt-20 sm:-mt-2 ">
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
           Mentor
         </h2>
         <MentorCard />
       </div>
-
       {/* Core Community Members */}
       <div className="mt-16 mb-10">
         <h2 className="text-white text-3xl font-bold mb-8 text-center">
@@ -111,26 +139,36 @@ export default function TeamPage() {
             name="Basir Khan"
             role="Core Community Lead"
             image={Basir}
+            github="https://github.com/BasirKhan418"
+            linkedin="https://www.linkedin.com/in/basir-khan-5aa62b258/"
           />
           <MemberCard
             name="Aniket Subudhi"
             role="Core Community Lead"
             image={Aniket}
+            github="https://github.com/Aniket-Subudh1"
+            linkedin="https://www.linkedin.com/in/aniket-subudh1/"
           />
           <MemberCard
             name="Swagat Kumar Dash"
             role="Core Community Lead"
             image={Swagat}
+            github="https://github.com/Swagat-D"
+            linkedin="https://www.linkedin.com/in/swagatdash15/"
           />
           <MemberCard
             name="Ankit Kumar Yadav"
             role="Core Community Lead"
             image={Ankit}
+            github="https://github.com/BoundlessKris"
+            linkedin="https://www.linkedin.com/in/ankit-kumar-yadav-041227270/"
           />
           <MemberCard
             name="Nyayabrata Das"
             role="Core Community Lead"
-            image={Swagat}
+            image={Nyaya}
+            github="https://github.com/Nyayabrata01"
+            linkedin="https://www.linkedin.com/in/nyayabrata-das-544642294/"
           />
         </div>
       </div>
@@ -141,22 +179,40 @@ export default function TeamPage() {
           Team Members
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
-          <MemberCard name="Disha Mishra" role="Team Member" image={Disha} />
-          <MemberCard name="Mir Sadab Ali" role="Team Member" image={Swagat} />
+          <MemberCard
+            name="Disha Mishra"
+            role="Team Member"
+            image={Disha}
+            github="https://github.com/dishamishra"
+            linkedin="https://linkedin.com/in/dishamishra"
+          />
+          <MemberCard
+            name="Mir Sadab Ali"
+            role="Team Member"
+            image={Mir}
+            github="https://github.com/mirsadab"
+            linkedin="https://linkedin.com/in/mirsadab"
+          />
           <MemberCard
             name="Bhawani Sankar Das"
             role="Team Member"
             image={Bhawani}
+            github="https://github.com/bhawanidash"
+            linkedin="https://linkedin.com/in/bhawanidash"
           />
           <MemberCard
             name="Aryan Ashima Swain"
             role="Team Member"
             image={Aryan}
+            github="https://github.com/aryanswain"
+            linkedin="https://linkedin.com/in/aryanswain"
           />
           <MemberCard
             name="Khawar Ahmed Khan"
             role="Team Member"
             image={Khawar}
+            github="https://github.com/khawarahemad"
+            linkedin="https://www.linkedin.com/in/khawarahemad/"
           />
         </div>
       </div>
