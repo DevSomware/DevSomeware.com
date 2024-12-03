@@ -183,29 +183,29 @@ export default function TeamPage() {
             name="Disha Mishra"
             role="Team Member"
             image={Disha}
-            github="https://github.com/dishamishra"
-            linkedin="https://linkedin.com/in/dishamishra"
+            github="https://github.com/dishaamishraa"
+            linkedin="https://www.linkedin.com/in/disha-mishra-699245279/"
           />
           <MemberCard
             name="Mir Sadab Ali"
             role="Team Member"
             image={Mir}
-            github="https://github.com/mirsadab"
-            linkedin="https://linkedin.com/in/mirsadab"
+            github="https://github.com/SadabAli"
+            linkedin="https://www.linkedin.com/in/mir-sadab-ali-b29157268/"
           />
           <MemberCard
             name="Bhawani Sankar Das"
             role="Team Member"
             image={Bhawani}
-            github="https://github.com/bhawanidash"
-            linkedin="https://linkedin.com/in/bhawanidash"
+            github="https://github.com/BhawaniDas"
+            linkedin="https://www.linkedin.com/in/bhawani-sankar-das-023889336/"
           />
           <MemberCard
             name="Aryan Ashima Swain"
             role="Team Member"
             image={Aryan}
-            github="https://github.com/aryanswain"
-            linkedin="https://linkedin.com/in/aryanswain"
+            github="https://www.linkedin.com/in/aryan-ashima-swain-8727b4300/"
+            linkedin="https://github.com/SARYAN23"
           />
           <MemberCard
             name="Khawar Ahmed Khan"
