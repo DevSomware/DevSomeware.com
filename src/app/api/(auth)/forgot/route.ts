@@ -20,7 +20,7 @@ export const POST = async (req: NextRequest) => {
           //check the user is exists or not 
           const user = await Users.findOne({email:data.email})
           if(user==null){
-            return NextResponse.json({message:"User is not exists or cannot forgot your password",success:false});
+            return NextResponse.json({message:"User does not exist or cannot reset the password.",success:false});
           }
           //if exists create token send it back to user via email
           const token = jwt.sign({email:user.email,name:user.name},process.env.JWT_SECRET||"");
