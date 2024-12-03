@@ -2,14 +2,20 @@ import { NextResponse,NextRequest } from "next/server";
 import ConnectDb from "@/middleware/connectDb";
 import Leads from "@/models/Leads";
 import nodemailer from "nodemailer";
+import Users from "@/models/Users";
 export const POST = async (req: NextRequest) => {
     try{
         await ConnectDb();
         const data = await req.json();
         //check the user is exists or not
         //parse all the input with zod 
+        console.log(data);
         //todo
         const lead = await Leads.findOne({email:data.email});
+        const user = await Users.findOne({email:data.email});
+        if(user==null){
+            return NextResponse.json({message:"To apply for the lead or co-lead position, you must be a community member. Please create a member account before submitting your application.",success:false});
+        }
         if(lead!=null){
             return NextResponse.json({message:"Lead application already exists with this email",success:false});
         }
@@ -20,13 +26,12 @@ export const POST = async (req: NextRequest) => {
             github:data.github,
             linkedin:data.linkedin,
             img:data.img,
-            intrests:data.intrests,
+            intrests:data.interests,
             languages:data.languages,
             frameworks:data.frameworks,
             projects:data.projects,
             why:data.why,
             expectations:data.expectations,
-            project:data.project
         });
         await newLead.save();
         //send the email to user that we have received your application asynchronously

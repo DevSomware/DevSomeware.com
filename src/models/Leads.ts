@@ -43,6 +43,15 @@ const LeadSchema = new mongoose.Schema({
     expectations:{
         type: String,
         required: false
+    },
+    isselected:{
+        type: Boolean,
+        required: false,
+        default:false
+    },
+    leadposition:{
+        type: String,
+        required: false,
     }
 },{timestamps:true});
 export default mongoose.models.Leads || mongoose.model("Leads",LeadSchema);

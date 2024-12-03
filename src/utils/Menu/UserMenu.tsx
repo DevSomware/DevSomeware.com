@@ -14,11 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Logout from '@/server/Logout';
 import {add }from '../../lib/features/user/userSlice';
-import { Settings, User, Ticket, Calendar, LogOut, LogIn } from 'lucide-react'
+import {  User, Ticket, Calendar, LogOut, LogIn } from 'lucide-react'
 import { useAppSelector } from '@/lib/hook';
 import { useAppDispatch } from '@/lib/hook';
 import { useRouter } from 'next/navigation';
-import { toast,Toaster } from 'sonner';
+
 export function UserMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const users = useAppSelector(state => state.user)
@@ -28,7 +28,7 @@ export function UserMenu() {
   const handleLogout = async () => {
     Logout();
     dispatch(add({name: '', email: '', img: '', isauth: false, github: '', linkedin: '', intrests: [], languages: '', frameworks: ''}));
-    toast.success('Logged out successfully');
+ 
     setTimeout(()=>{
     router.push('/');
     },2000)
@@ -45,7 +45,6 @@ export function UserMenu() {
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <Toaster richColors/>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">

@@ -20,7 +20,7 @@ export const POST = async (req:NextRequest) => {
         password:Cryptojs.AES.encrypt(data.password,process.env.AES_SECRET||"").toString(),
         github:data.github,
         linkedin:data.linkedin,
-        intrests:data.intrests,
+        intrests:data.interests,
         languages:data.languages,
         frameworks:data.frameworks,
         why:data.why,
