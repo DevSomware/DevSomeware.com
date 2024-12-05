@@ -25,10 +25,9 @@ const JoinUsPage = () => {
         </h1>
         <p className="lg:text-xl sm:text-lg text-neutral-600 dark:text-neutral-300 max-w-3xl mx-auto">
           Become a part of Devsomeware! Apply as a <strong>Member</strong> to
-          join our community and access exclusive opportunities. Once
-          you&apos;re a Member, you can also apply to become a{" "}
-          <strong>Lead/Co-Lead</strong> and take your contributions to the next
-          level!
+          join our community and access exclusive opportunities. Once you're a
+          Member, you can also apply to become a <strong>Lead/Co-Lead</strong>{" "}
+          and take your contributions to the next level!
         </p>
       </div>
 

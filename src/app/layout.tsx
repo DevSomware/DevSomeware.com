@@ -57,6 +57,18 @@ export const metadata: Metadata = {
   robots: "index, follow",
 };
 
+interface User {
+  name: string;
+  email: string;
+  img: string;
+  github: string;
+  linkedin: string;
+  intrests: string[];
+  languages: string[];
+  frameworks: string[];
+  bio: string;
+}
+
 export default async function RootLayout({
   children,
 }: {
@@ -65,10 +77,9 @@ export default async function RootLayout({
   let initialUserData = null;
 
   try {
-    const [isauth, users] = await VerifyUser();
-    const user = typeof users === 'string' ? JSON.parse(users) : null;
-
-    if (isauth) {
+    const verifyResult = await VerifyUser();
+    if (verifyResult.isAuth && verifyResult.user) {
+      const user = JSON.parse(verifyResult.user) as User;
       initialUserData = {
         name: user.name,
         email: user.email,
@@ -81,6 +92,8 @@ export default async function RootLayout({
         frameworks: user.frameworks,
         bio: user.bio,
       };
+    } else {
+      console.warn(`User verification failed: ${verifyResult.error}`);
     }
   } catch (error) {
     console.error("Error verifying user:", error);

@@ -5,7 +5,7 @@ import CryptoJS from "crypto-js";
 import Users from "@/models/Users";
 import { cookies } from 'next/headers'
 export const POST = async (req: NextRequest) => {
-    const cookie = cookies()
+    const cookie = await cookies()
     try {
         await ConnectDb();
         const data = await req.json();
