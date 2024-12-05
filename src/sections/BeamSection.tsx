@@ -152,9 +152,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="Purple"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
       <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
@@ -169,9 +169,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="black"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
     </svg>
@@ -184,9 +184,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="Purple"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <polyline points="16 16 12 12 8 16"></polyline>
       <line x1="12" y1="12" x2="12" y2="21"></line>
@@ -202,9 +202,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="Purple"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <line x1="22" y1="12" x2="2" y2="12"></line>
       <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
@@ -220,9 +220,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="Purple"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
       <rect x="9" y="9" width="6" height="6"></rect>
@@ -283,9 +283,9 @@ const Icons = {
       viewBox="0 0 24 24"
       fill="none"
       stroke="purple"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <circle cx="12" cy="12" r="4"></circle>
       <line x1="1.05" y1="12" x2="7" y2="12"></line>

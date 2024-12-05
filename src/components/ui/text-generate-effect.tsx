@@ -1,5 +1,6 @@
 "use client";
-import { useLayoutEffect, useRef } from "react";
+
+import { useLayoutEffect, useRef, CSSProperties } from "react";
 import { stagger, useAnimate } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -38,7 +39,8 @@ export const TextGenerateEffect = ({
             ".animated-span",
             {
               opacity: [0, 1],
-              filter: filter ? ["blur(10px)", "blur(0px)"] : ["none", "none"],
+
+              "--blur": filter ? [10, 0] : [0, 0],
             },
             {
               duration: duration || 1,
@@ -70,9 +72,12 @@ export const TextGenerateEffect = ({
         <span
           key={`${word}-${idx}`}
           className="animated-span dark:text-purple-200 text-black opacity-0"
-          style={{
-            filter: filter ? "blur(10px)" : "none",
-          }}
+          style={
+            {
+              "--blur": "10",
+              filter: filter ? "blur(var(--blur)px)" : "none",
+            } as CSSProperties
+          }
         >
           {word}{" "}
         </span>

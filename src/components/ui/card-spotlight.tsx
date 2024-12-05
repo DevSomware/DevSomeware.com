@@ -1,17 +1,8 @@
 "use client";
-
 import { useMotionValue, motion, useMotionTemplate } from "framer-motion";
 import React, { MouseEvent as ReactMouseEvent, useState } from "react";
-import dynamic from "next/dynamic";
 import { cn } from "@/lib/util";
 
-const CanvasRevealEffect = dynamic(
-  () =>
-    import("@/components/ui/canvas-reveal-effect").then(
-      (mod) => mod.CanvasRevealEffect
-    ),
-  { ssr: false }
-);
 export const CardSpotlight = ({
   children,
   radius = 350,
@@ -63,19 +54,7 @@ export const CardSpotlight = ({
             )
           `,
         }}
-      >
-        {isHovering && (
-          <CanvasRevealEffect
-            animationSpeed={5}
-            containerClassName="bg-transparent absolute inset-0 pointer-events-none"
-            colors={[
-              [59, 130, 246],
-              [139, 92, 246],
-            ]}
-            dotSize={3}
-          />
-        )}
-      </motion.div>
+      ></motion.div>
       {children}
     </div>
   );
