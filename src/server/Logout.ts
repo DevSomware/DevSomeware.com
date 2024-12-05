@@ -1,7 +1,7 @@
 "use server"
 import { cookies } from "next/headers"
 const Logout = async () => {
-    const cookie = cookies();
+    const cookie = await cookies();
     cookie.delete("token");
     return true;
 
