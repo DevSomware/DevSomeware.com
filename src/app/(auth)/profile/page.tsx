@@ -62,62 +62,103 @@ const ProfilePage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (img:string) => {
+  const handleSubmit = async (img: string) => {
     setLoading(true);
-    try{
-    const fetchdata = await fetch("/api/profile", {
-      method: "POST",
-      body: JSON.stringify({...formData,email:user.email,img:img}),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const response = await fetchdata.json();
-    setLoading(false);
-    if(response.success){
-      toast.success("Profile updated successfully");
-      setIsEditing(false);
-      dispatch(add({name:response.data.name,bio:response.data.bio,frameworks:response.data.frameworks,languages:response.data.languages,img:response.data.img,email:response.data.email,isauth:true,intrests:response.data.intrests}));
-    }
-    else{
-      toast.error(response.message);
-    }
-  }
-    catch(err){
+    try {
+      const fetchdata = await fetch("/api/profile", {
+        method: "POST",
+        body: JSON.stringify({ ...formData, email: user.email, img: img }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await fetchdata.json();
+      setLoading(false);
+      if (response.success) {
+        toast.success("Profile updated successfully");
+        setIsEditing(false);
+        dispatch(
+          add({
+            name: response.data.name,
+            bio: response.data.bio,
+            frameworks: response.data.frameworks,
+            languages: response.data.languages,
+            img: response.data.img,
+            email: response.data.email,
+            isauth: true,
+            intrests: response.data.intrests,
+          })
+        );
+      } else {
+        toast.error(response.message);
+      }
+    } catch (err) {
       console.log(err);
       setLoading(false);
       toast.error("Error while updating profile");
     }
 
-    //
-        // toast.success("Profile updated successfully");
-        // setIsEditing(false);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-      setLoading(true);
-      const data = new FormData();
-      data.append("file", file as Blob);
-      data.append("upload_preset", "ml_default");
-      data.append("cloud_name", "db0x5vhbk");
-      fetch("https://api.cloudinary.com/v1_1/db0x5vhbk/image/upload", {
-        method: "post",
-        body: data,
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-        
-          console.log(data.url);
-          setLoading(false);
-          toast.success("Image uploaded successfully");
-          handleSubmit(data.url);
-          
-        }).catch((err) => {
-          console.log(err);
-          setLoading(false);
-          toast.error("Error while uploading image");
-        });
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+
+      
+        const size = 400;
+        canvas.width = size;
+        canvas.height = size;
+
+        if (context) {
+          context.drawImage(img, 0, 0, size, size);
+
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              toast.error("Error resizing image.");
+              return;
+            }
+
+            setLoading(true);
+            const data = new FormData();
+            data.append("file", blob);
+            data.append("upload_preset", "ml_default");
+            data.append("cloud_name", "db0x5vhbk");
+
+           
+            fetch("https://api.cloudinary.com/v1_1/db0x5vhbk/image/upload", {
+              method: "post",
+              body: data,
+            })
+              .then((resp) => resp.json())
+              .then((data) => {
+                console.log(data.url);
+                setLoading(false);
+                toast.success("Image uploaded successfully");
+                handleSubmit(data.url);
+              })
+              .catch((err) => {
+                console.error(err);
+                setLoading(false);
+                toast.error("Error while uploading image");
+              });
+          }, file.type);
+        }
+      };
+      img.src = event.target?.result as string;
+    };
+
+    reader.onerror = () => {
+      toast.error("Error reading file.");
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -125,7 +166,6 @@ const ProfilePage = () => {
       <Toaster richColors />
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
       <div className="lg:w-[80rem] sm:w-[22rem] mt-10  mb-10 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input backdrop-blur-sm border border-gray-900  relative">
-        
         <h2 className="font-bold text-3xl text-center text-neutral-800 dark:text-neutral-200">
           Your Profile
         </h2>
@@ -155,7 +195,9 @@ const ProfilePage = () => {
                 <div className="flex items-center justify-center bg-violet-50 text-violet-700 hover:bg-violet-100 p-2 rounded-full shadow-md">
                   <FaUpload className="text-lg" />
                   <span className="ml-2 text-sm font-medium">Upload Photo</span>
-                  {loading&&<Loader2 className="mx-2 mr-2 h-5 w-5 animate-spin" />}
+                  {loading && (
+                    <Loader2 className="mx-2 mr-2 h-5 w-5 animate-spin" />
+                  )}
                 </div>
               </label>
             </div>
