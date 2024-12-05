@@ -2,36 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body {
-  cursor: none;
-}
-
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 20px;
-  height: 20px;
-  border: 0.5px solid white;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  mix-blend-mode: difference;
-  background-color: transparent;
-  transform: translate(-50%, -50%);
-  transition: transform 0.15s ease-out, background-color 0.15s ease-out;
-}
-
-.cursor-text {
-  font-size: 6px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  display: none;
-  color: white;
-  text-transform: uppercase;
-}
-
 .logo {
   position: relative;
   display: inline-block;

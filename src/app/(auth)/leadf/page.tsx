@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/util";
-import { Toaster,toast } from "sonner";
+import { Toaster, toast } from "sonner";
 import { CiUser } from "react-icons/ci";
 import { MdOutlineEmail } from "react-icons/md";
 import { FaGithub } from "react-icons/fa6";
@@ -14,9 +14,9 @@ import { FiUserCheck } from "react-icons/fi";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import { BsFillPatchQuestionFill } from "react-icons/bs";
 import { MdFolderZip } from "react-icons/md";
-import { Loader2 } from 'lucide-react';
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-const steps = ["Basic Info", "Technical BG", "Intentions", "Summary"];
+const steps = ["Basic Info", "Technical BG", "Intentions", "Preview"];
 
 const Leadform = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -125,9 +125,9 @@ const Leadform = () => {
     return Object.keys(stepErrors).length === 0;
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     setLoading(true);
-     const fetchdata = await fetch("/api/lead", { 
+    const fetchdata = await fetch("/api/lead", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -144,21 +144,22 @@ const Leadform = () => {
         why: formData.whyJoin,
         expectations: formData.expectations,
       }),
-     })
-      const response = await fetchdata.json();
-      setLoading(false);
-      if(response.success){
-toast.success("Your lead/co-lead application has been submitted successfully");
-setTimeout(() => {  
-  toast.success("Keep an eye on your email inbox for further updates");
-  setTimeout(() => {
-    router.push("/verification");
-  },1500)
-},1000)
-      }
-      else{
-toast.error(response.message);
-      }
+    });
+    const response = await fetchdata.json();
+    setLoading(false);
+    if (response.success) {
+      toast.success(
+        "Your lead/co-lead application has been submitted successfully"
+      );
+      setTimeout(() => {
+        toast.success("Keep an eye on your email inbox for further updates");
+        setTimeout(() => {
+          router.push("/verification");
+        }, 1500);
+      }, 1000);
+    } else {
+      toast.error(response.message);
+    }
   };
 
   const renderStepContent = () => {
@@ -342,84 +343,91 @@ toast.error(response.message);
       case 3:
         return (
           <div className="">
-          <h3 className="text-2xl font-bold text-center mb-6">Summary</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Personal Information Box */}
-            <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
-              <h4 className="text-lg font-semibold mb-3 text-purple-600">
-                Personal Information
-              </h4>
-              <p className="mb-2 break-words flex justify-center items-center">
-              <CiUser className="h-4 w-4"/> <strong className="mx-1">Name:</strong> {formData.name}
-              </p>
-              <p className="mb-2 break-words flex justify-center items-center">
-               <MdOutlineEmail/> <strong className="mx-1">Email:</strong> {formData.email}
-              </p>
-              <p className="mb-2 break-words flex justify-center items-center flex-col">
-                <FaGithub className="h-4 w-4"/>
-                <strong>GitHub: </strong>
-                <a
-                  href={formData.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 mx-1 text-center"
-                >
-                  {formData.github}
-                </a>
-              </p>
-              <p className="break-words flex justify-center items-center flex-col">
-                <FaLinkedin />
-                <strong>LinkedIn: </strong>
-                <a
-                  href={formData.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 text-center"
-                >
-                  {formData.linkedin}
-                </a>
-              </p>
-            </div>
+            <h3 className="text-2xl font-bold text-center mb-6">Preview</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Personal Information Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-purple-600">
+                  Personal Information
+                </h4>
+                <p className="mb-2 break-words flex justify-center items-center">
+                  <CiUser className="h-4 w-4" />{" "}
+                  <strong className="mx-1">Name:</strong> {formData.name}
+                </p>
+                <p className="mb-2 break-words flex justify-center items-center">
+                  <MdOutlineEmail /> <strong className="mx-1">Email:</strong>{" "}
+                  {formData.email}
+                </p>
+                <p className="mb-2 break-words flex justify-center items-center flex-col">
+                  <FaGithub className="h-4 w-4" />
+                  <strong>GitHub: </strong>
+                  <a
+                    href={formData.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 mx-1 text-center"
+                  >
+                    {formData.github}
+                  </a>
+                </p>
+                <p className="break-words flex justify-center items-center flex-col">
+                  <FaLinkedin />
+                  <strong>LinkedIn: </strong>
+                  <a
+                    href={formData.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 text-center"
+                  >
+                    {formData.linkedin}
+                  </a>
+                </p>
+              </div>
 
-            {/* Technical Background Box */}
-            <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
-              <h4 className="text-lg font-semibold mb-3 text-blue-600">
-                Technical Background
-              </h4>
-              <p className="mb-2 break-words flex justify-start items-center">
-              <FaCode />
-                <strong className="mx-2">Languages:</strong> {formData.languages}
-              </p>
-              <p className="mb-2 break-words flex justify-start items-center">
-              <FaReact />
-                <strong className="mx-2">Frameworks:</strong> {formData.frameworks}
-              </p>
-              <p className="break-words flex justify-center items-center flex-col">
-              <FiUserCheck className="h-5 w-5"/>
-                <strong className="mx-2">Interests:</strong> {formData.interests.join(", ")}
-              </p>
-              <p className="break-words flex justify-center items-center flex-col">
-              <MdFolderZip  className="h-5 w-5"/>
-                <strong className="mx-2">Projects:</strong> {formData.projects}
-              </p>
-            </div>
+              {/* Technical Background Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-blue-600">
+                  Technical Background
+                </h4>
+                <p className="mb-2 break-words flex justify-start items-center">
+                  <FaCode />
+                  <strong className="mx-2">Languages:</strong>{" "}
+                  {formData.languages}
+                </p>
+                <p className="mb-2 break-words flex justify-start items-center">
+                  <FaReact />
+                  <strong className="mx-2">Frameworks:</strong>{" "}
+                  {formData.frameworks}
+                </p>
+                <p className="break-words flex justify-center items-center flex-col">
+                  <FiUserCheck className="h-5 w-5" />
+                  <strong className="mx-2">Interests:</strong>{" "}
+                  {formData.interests.join(", ")}
+                </p>
+                <p className="break-words flex justify-center items-center flex-col">
+                  <MdFolderZip className="h-5 w-5" />
+                  <strong className="mx-2">Projects:</strong>{" "}
+                  {formData.projects}
+                </p>
+              </div>
 
-            {/* Motivations Box */}
-            <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
-              <h4 className="text-lg font-semibold mb-3 text-green-600 text-center">
-                MotivationsZ
-              </h4>
-              <p className="mb-2 break-words flex flex-col justify-center items-center">
-              <FaRegQuestionCircle  className="h-5 w-5"/>
-                <strong className="my-1">Why Join:</strong> {formData.whyJoin}
-              </p>
-              <p className="break-words flex flex-col justify-center items-center">
-              <BsFillPatchQuestionFill  className="h-5 w-5"/>
-                <strong className="my-1">Expectations:</strong> {formData.expectations}
-              </p>
+              {/* Motivations Box */}
+              <div className="p-4 border rounded-lg shadow-md bg-gray-50 dark:bg-gray-800">
+                <h4 className="text-lg font-semibold mb-3 text-green-600 text-center">
+                  MotivationsZ
+                </h4>
+                <p className="mb-2 break-words flex flex-col justify-center items-center">
+                  <FaRegQuestionCircle className="h-5 w-5" />
+                  <strong className="my-1">Why Join:</strong> {formData.whyJoin}
+                </p>
+                <p className="break-words flex flex-col justify-center items-center">
+                  <BsFillPatchQuestionFill className="h-5 w-5" />
+                  <strong className="my-1">Expectations:</strong>{" "}
+                  {formData.expectations}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
         );
       default:
         return null;
@@ -478,53 +486,51 @@ toast.error(response.message);
       </div>
 
       {/* Form */}
-      
+
       <div className="mb-6" style={{ minHeight: "200px" }}>
-          {renderStepContent()}
-        </div>
-        <Toaster richColors  />
-        <div className="flex justify-between">
-        
-          {/* Previous Button */}
+        {renderStepContent()}
+      </div>
+      <Toaster richColors />
+      <div className="flex justify-between">
+        {/* Previous Button */}
+        <button
+          type="button"
+          onClick={handlePrev}
+          disabled={currentStep === 0}
+          className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-28 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+        >
+          &larr; Previous
+          <BottomGradient />
+        </button>
+        {/* Next or Submit Button */}
+        {currentStep === steps.length - 1 ? (
           <button
-            type="button"
-            onClick={handlePrev}
-            disabled={currentStep === 0}
-            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-28 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+            onClick={handleSubmit}
+            className="bg-gradient-to-br py-2 text-center relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800  text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           >
-            &larr; Previous
+            {loading ? (
+              <div className="flex justify-center items-center mx-1">
+                <Loader2 className="mr-2 h-4 w-4 animate-spin mx-1" />
+                Submitting...
+              </div>
+            ) : (
+              <div className="flex justify-center items-center mx-6">
+                Submit
+              </div>
+            )}
             <BottomGradient />
           </button>
-          {/* Next or Submit Button */}
-          {currentStep === steps.length - 1 ? (
-            <button
-              onClick={handleSubmit}
-              className="bg-gradient-to-br py-2 text-center relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800  text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            >
-              {loading ? (
-                    <div className="flex justify-center items-center mx-1">
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin mx-1" />
-                      Submitting...
-                    </div>
-                  ) : (
-                    <div className="flex justify-center items-center mx-6">
-                      Submit
-                    </div>
-    
-                  )}
-              <BottomGradient />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={handleNext}
-              className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-24 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-            >
-              Next &rarr;
-              <BottomGradient />
-            </button>
-          )}
-        </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-24 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          >
+            Next &rarr;
+            <BottomGradient />
+          </button>
+        )}
+      </div>
     </div>
   );
 };

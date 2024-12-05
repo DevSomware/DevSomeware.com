@@ -4,7 +4,6 @@ import "./globals.css";
 import clsx from "clsx";
 import NextTopLoader from "nextjs-toploader";
 import { ClientWrapper } from "@/wrapper/ClientWrapper";
-import Cursor from "@/components/ui/cursor";
 import StoreProvider from "./StoreProvider";
 import { ThemeProvider } from "@/components/theme-provider";
 import VerifyUser from "@/server/VerifyUser";
@@ -123,9 +122,6 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="hidden md:block">
-            <Cursor />
-          </div>
           <StoreProvider initialUserData={initialUserData}>
             <ClientWrapper>{children}</ClientWrapper>
           </StoreProvider>

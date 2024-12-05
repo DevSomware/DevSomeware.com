@@ -7,7 +7,6 @@ export const Footers = () => {
     <footer className="bg-black py-8 border-t border-gray-700">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          {/* Left Side: Logo and Title */}
           <div className="flex items-center gap-3">
             <Image
               src={Logo}
@@ -21,7 +20,6 @@ export const Footers = () => {
             </div>
           </div>
 
-          {/* Center: Social Icons */}
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/DevSomware  
