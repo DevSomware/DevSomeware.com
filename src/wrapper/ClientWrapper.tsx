@@ -5,7 +5,6 @@ import { Preloader } from "@/components/ui/preloader";
 import { Navbar } from "@/components/Navbar";
 import BottomNavbar from "@/components/B-Navbar";
 import { Footers } from "@/sections/Footers";
-import Cursor from "@/components/ui/cursor";
 
 export const ClientWrapper = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,9 +23,6 @@ export const ClientWrapper = ({ children }: { children: React.ReactNode }) => {
         <Preloader />
       ) : (
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="block sm:hidden md:hidden">
-            <Cursor />
-          </div>
           <Navbar />
           {children}
           <BottomNavbar />
