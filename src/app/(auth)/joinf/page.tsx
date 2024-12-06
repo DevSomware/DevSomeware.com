@@ -98,9 +98,7 @@ const Joiningform = () => {
         if (!formData.linkedin) {
           stepErrors.linkedin = "LinkedIn link is required.";
         } else if (
-          !/^https?:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+$/.test(
-            formData.linkedin
-          )
+          !/^https:\/\/www\.linkedin\.com\/in\/.+$/.test(formData.linkedin)
         ) {
           stepErrors.linkedin = "Invalid LinkedIn URL.";
         }
