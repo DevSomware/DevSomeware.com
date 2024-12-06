@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toaster, toast } from "sonner";
@@ -10,6 +10,7 @@ import { add } from "@/lib/features/user/userSlice";
 import { ButtonGradient } from "@/components/ui/ButtonGradient";
 import { LabelInputContainer } from "@/components/ui/LabelInputContainer";
 import { FaUpload } from "react-icons/fa";
+import Cropper from "react-easy-crop";
 
 interface UserState {
   name: string;
@@ -48,6 +49,18 @@ const ProfilePage = () => {
   });
   const [loading, setLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+  // States for cropping modal
+  const [showCropModal, setShowCropModal] = useState(false);
+  const [imageSrc, setImageSrc] = useState<string>("");
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState<{
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+  } | null>(null);
 
   useEffect(() => {
     if (!user.isauth) {
@@ -97,7 +110,81 @@ const ProfilePage = () => {
       setLoading(false);
       toast.error("Error while updating profile");
     }
+  };
 
+  const onCropComplete = useCallback((_: any, croppedAreaPixels: { x: number; y: number; width: number; height: number }) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  }, []);
+
+  const createImage = (url: string): Promise<HTMLImageElement> =>
+    new Promise((resolve, reject) => {
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.src = url;
+      image.onload = () => resolve(image);
+      image.onerror = (error) => reject(error);
+    });
+
+  const getCroppedImg = async (
+    imageSrc: string,
+    pixelCrop: { x: number; y: number; width: number; height: number }
+  ) => {
+    const image = await createImage(imageSrc);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    // Ensure the output is also 4x4 ratio (square)
+    const size = 400;
+    canvas.width = size;
+    canvas.height = size;
+
+    if (!ctx) return null;
+
+    // PixelCrop contains the portion of the image that should be cropped
+    // We draw that portion onto our canvas of fixed size (400x400)
+    // This ensures a final square result.
+    ctx.drawImage(
+      image,
+      pixelCrop.x,
+      pixelCrop.y,
+      pixelCrop.width,
+      pixelCrop.height,
+      0,
+      0,
+      size,
+      size
+    );
+
+    return new Promise<Blob | null>((resolve) => {
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, "image/jpeg");
+    });
+  };
+
+  const uploadCroppedImage = async (blob: Blob) => {
+    setLoading(true);
+    const data = new FormData();
+    data.append("file", blob);
+    data.append("upload_preset", "ml_default");
+    data.append("cloud_name", "db0x5vhbk");
+
+    fetch("https://api.cloudinary.com/v1_1/db0x5vhbk/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setLoading(false);
+        toast.success("Image uploaded successfully");
+        handleSubmit(data.url);
+        setShowCropModal(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+        toast.error("Error while uploading image");
+      });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,52 +193,9 @@ const ProfilePage = () => {
 
     const reader = new FileReader();
     reader.onload = (event) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const context = canvas.getContext("2d");
-
-      
-        const size = 400;
-        canvas.width = size;
-        canvas.height = size;
-
-        if (context) {
-          context.drawImage(img, 0, 0, size, size);
-
-          canvas.toBlob((blob) => {
-            if (!blob) {
-              toast.error("Error resizing image.");
-              return;
-            }
-
-            setLoading(true);
-            const data = new FormData();
-            data.append("file", blob);
-            data.append("upload_preset", "ml_default");
-            data.append("cloud_name", "db0x5vhbk");
-
-           
-            fetch("https://api.cloudinary.com/v1_1/db0x5vhbk/image/upload", {
-              method: "post",
-              body: data,
-            })
-              .then((resp) => resp.json())
-              .then((data) => {
-                console.log(data.url);
-                setLoading(false);
-                toast.success("Image uploaded successfully");
-                handleSubmit(data.url);
-              })
-              .catch((err) => {
-                console.error(err);
-                setLoading(false);
-                toast.error("Error while uploading image");
-              });
-          }, file.type);
-        }
-      };
-      img.src = event.target?.result as string;
+      if (!event.target?.result) return;
+      setImageSrc(event.target.result as string);
+      setShowCropModal(true); // Show the modal to crop
     };
 
     reader.onerror = () => {
@@ -161,11 +205,50 @@ const ProfilePage = () => {
     reader.readAsDataURL(file);
   };
 
+  const handleCrop = async () => {
+    if (!imageSrc || !croppedAreaPixels) {
+      toast.error("Crop area not determined");
+      return;
+    }
+    const blob = await getCroppedImg(imageSrc, croppedAreaPixels);
+    if (!blob) {
+      toast.error("Error cropping image.");
+      return;
+    }
+    uploadCroppedImage(blob);
+  };
+
+  const handleResizeWithoutCropping = async () => {
+    // Directly resize the entire image to 400x400 without cropping
+    // This means we ignore the cropping tool and just use the image as-is.
+    if (!imageSrc) return;
+    const image = await createImage(imageSrc);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const size = 400;
+    canvas.width = size;
+    canvas.height = size;
+
+    if (!ctx) return;
+
+    // Draw the entire image scaled to 400x400
+    ctx.drawImage(image, 0, 0, size, size);
+
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        toast.error("Error resizing image.");
+        return;
+      }
+      uploadCroppedImage(blob);
+    }, "image/jpeg");
+  };
+
   return (
     <div className="min-h-screen dark:bg-black bg-white dark:bg-grid-white/[0.2] bg-grid-black/[0.2] flex items-center justify-center">
       <Toaster richColors />
       <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-      <div className="lg:w-[80rem] sm:w-[22rem] mt-10  mb-10 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input backdrop-blur-sm border border-gray-900  relative">
+      <div className="lg:w-[80rem] sm:w-[22rem] mt-10 mb-10 rounded-none md:rounded-2xl p-4 md:p-8 shadow-input backdrop-blur-sm border border-gray-900 relative">
         <h2 className="font-bold text-3xl text-center text-neutral-800 dark:text-neutral-200">
           Your Profile
         </h2>
@@ -175,7 +258,7 @@ const ProfilePage = () => {
 
         {isEditing ? (
           // Edit Mode
-          <div className="my-8  relative">
+          <div className="my-8 relative">
             <div className="flex flex-col items-center mb-8">
               <img
                 src={formData.img || "/profile.jpg"}
@@ -226,7 +309,7 @@ const ProfilePage = () => {
               />
             </LabelInputContainer>
 
-            {/* Selected Domains (Radio Buttons) */}
+            {/* Selected Domains */}
             <div className="mb-4">
               <Label>Selected Domains</Label>
               <div className="flex flex-col space-y-2 mt-2">
@@ -302,8 +385,6 @@ const ProfilePage = () => {
                 onChange={handleInputChange}
               />
             </LabelInputContainer>
-
-            {/* Role (non-editable) */}
 
             {/* Save and Cancel Buttons */}
             <div className="flex space-x-4">
@@ -426,6 +507,89 @@ const ProfilePage = () => {
           </div>
         )}
       </div>
+
+      {showCropModal && (
+        <div className="fixed inset-0 flex items-center top-20 justify-center bg-black bg-opacity-70 z-50 p-4">
+          <div className="bg-white dark:bg-black rounded-lg shadow-lg p-6 w-full max-w-md relative">
+            <h3 className="text-xl font-semibold text-center mb-4 text-gray-800 dark:text-gray-200">
+              Adjust your photo
+            </h3>
+            <div className="relative w-full h-64 sm:h-72 md:h-80 bg-black dark:bg-gray-800">
+              {imageSrc && (
+                <Cropper
+                  image={imageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1} // 1:1 ratio for 4x4 cropping
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                  objectFit="contain"
+                />
+              )}
+            </div>
+
+            {/* Zoom Slider */}
+            <div className="flex flex-col items-center mt-4">
+              <Label className="text-sm text-gray-600 dark:text-gray-300 mb-2">
+                Zoom
+              </Label>
+              <input
+                type="range"
+                min={1}
+                max={3}
+                step={0.1}
+                value={zoom}
+                onChange={(e) => setZoom(Number(e.target.value))}
+                className="w-full"
+              />
+            </div>
+
+            <div className="flex space-x-4 mt-6">
+              <button
+                onClick={handleCrop}
+                className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900
+    dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 text-white font-medium py-2 px-4 rounded-md w-full"
+              >
+                {loading ? (
+                  <div className="flex justify-center items-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Cropping...
+                  </div>
+                ) : (
+                  "Crop"
+                )}
+                <ButtonGradient />
+              </button>
+              <button
+                onClick={handleResizeWithoutCropping}
+                className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900
+    dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 text-white font-medium py-2 px-4 rounded-md w-full"
+              >
+                {loading ? (
+                  <div className="flex justify-center items-center">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Resizing...
+                  </div>
+                ) : (
+                  "Just Resize"
+                )}
+                <ButtonGradient />
+              </button>
+            </div>
+
+            <button
+              onClick={() => setShowCropModal(false)}
+              className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900
+    dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 text-white font-medium py-2 px-4 rounded-md w-full mt-4"
+              disabled={loading}
+            >
+              Cancel
+              <ButtonGradient />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
