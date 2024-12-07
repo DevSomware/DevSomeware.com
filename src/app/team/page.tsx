@@ -13,6 +13,7 @@ import WatermarkLogo from "@/assets/logo.png";
 import Mir from "@/assets/mir.jpg";
 import Nyaya from "@/assets/nyaya.jpg";
 import Saneev from "@/assets/saneev.webp";
+import Asutosh from "@/assets/asutosh.jpg";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
@@ -180,6 +181,13 @@ export default function TeamPage() {
         </h2>
         <div className="flex flex-wrap justify-center gap-8">
           <MemberCard
+            name="Asutosh Parida"
+            role="Team Member"
+            image={Asutosh}
+            github="https://github.com/asutoshparida8658"
+            linkedin="https://www.linkedin.com/in/asutosh-parida-b3b686250"
+          />
+          <MemberCard
             name="Disha Mishra"
             role="Team Member"
             image={Disha}
@@ -205,7 +213,7 @@ export default function TeamPage() {
             role="Team Member"
             image={Aryan}
             github="https://github.com/SARYAN23"
-            linkedin="https://www.linkedin.com/in/aryan-ashima-swain-8727b4300/" 
+            linkedin="https://www.linkedin.com/in/aryan-ashima-swain-8727b4300/"
           />
           <MemberCard
             name="Khawar Ahmed Khan"
