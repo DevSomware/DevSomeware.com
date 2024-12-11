@@ -21,6 +21,7 @@ import {
   LogOut,
   LogIn,
   FlaskConical,
+  Target,
 } from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
 import { useRouter } from "next/navigation";
@@ -55,8 +56,9 @@ export function UserMenu() {
   const handleEventsRedirect = () => {
     router.push("/events");
   };
+
   const handleLearnDevSomeware = () => {
-    router.push("https://learn.devsomeware.com/");
+    window.open("https://learn.devsomeware.com/", "_blank");
   };
 
   const handleTicketsRedirect = () => {
