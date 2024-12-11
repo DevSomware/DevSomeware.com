@@ -14,6 +14,7 @@ import Mir from "@/assets/mir.jpg";
 import Nyaya from "@/assets/nyaya.jpg";
 import Saneev from "@/assets/saneev.webp";
 import Asutosh from "@/assets/asutosh.jpg";
+import Priyanshu from "@/assets/priyanshu.jpg";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { StaticImageData } from "next/image";
 import { TextHoverEffect } from "@/components/ui/text-hover-effect";
@@ -200,6 +201,13 @@ export default function TeamPage() {
             image={Mir}
             github="https://github.com/SadabAli"
             linkedin="https://www.linkedin.com/in/mir-sadab-ali-b29157268/"
+          />
+          <MemberCard
+            name="Priyanshu Kumar"
+            role="Team Member"
+            image={Priyanshu}
+            github="https://github.com/Priyanshu270603"
+            linkedin="https://www.linkedin.com/in/priyanshu-kumar-305902303"
           />
           <MemberCard
             name="Bhawani Sankar Das"

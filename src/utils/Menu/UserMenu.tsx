@@ -14,7 +14,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Logout from "@/server/Logout";
 import { add } from "../../lib/features/user/userSlice";
-import { User, Ticket, Calendar, LogOut, LogIn } from "lucide-react";
+import {
+  User,
+  Ticket,
+  Calendar,
+  LogOut,
+  LogIn,
+  FlaskConical,
+} from "lucide-react";
 import { useAppSelector, useAppDispatch } from "@/lib/hook";
 import { useRouter } from "next/navigation";
 
@@ -47,6 +54,9 @@ export function UserMenu() {
 
   const handleEventsRedirect = () => {
     router.push("/events");
+  };
+  const handleLearnDevSomeware = () => {
+    router.push("https://learn.devsomeware.com/");
   };
 
   const handleTicketsRedirect = () => {
@@ -105,6 +115,10 @@ export function UserMenu() {
         <DropdownMenuItem onClick={handleEventsRedirect}>
           <Calendar className="mr-2 h-4 w-4" />
           <span>Events</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLearnDevSomeware}>
+          <FlaskConical className="mr-2 h-4 w-4" />
+          <span>DevSomeware Skill-Lab</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={handleLogout}>
